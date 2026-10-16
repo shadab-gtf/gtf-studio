@@ -1,0 +1,199 @@
+.bar {
+  flex: none;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  height: var(--ed-topbar-h);
+  padding: 0 12px 0 14px;
+  background: var(--ed-surface);
+  border-bottom: 1px solid var(--ed-border);
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.right {
+  justify-content: flex-end;
+}
+.presence {
+  display: flex;
+  flex: none;
+}
+.end {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  white-space: nowrap;
+}
+
+.menus {
+  display: flex;
+  flex: none;
+  gap: 2px;
+  margin-left: 4px;
+}
+.menuBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  height: 32px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--ed-text);
+  font: 600 13px / 1 var(--font-sans);
+  cursor: pointer;
+  transition: background var(--ed-dur);
+}
+.menuBtn:hover,
+.menuBtn[aria-expanded="true"] {
+  background: var(--ed-surface-3);
+}
+.menuBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.menuIcon {
+  width: 34px;
+  padding: 0;
+}
+
+/* Undo and redo sit after the menus, set off by a thin rule. */
+.history {
+  display: flex;
+  flex: none;
+  gap: 2px;
+  margin-left: 2px;
+  padding-left: 8px;
+  border-left: 1px solid var(--ed-border);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+.title {
+  width: clamp(140px, 24vw, 300px);
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ed-text);
+  font: 600 14px / 1 var(--font-sans);
+  text-align: center;
+  text-overflow: ellipsis;
+}
+.title:hover:not(:read-only) {
+  border-color: var(--ed-border);
+  background: var(--ed-surface-2);
+}
+.title:focus {
+  outline: none;
+  border-color: var(--ed-accent);
+  background: var(--ed-surface);
+  box-shadow: 0 0 0 3px var(--ed-accent-glow);
+  text-align: left;
+}
+
+.share {
+  gap: 6px;
+  margin-left: 2px;
+  padding-right: 10px;
+}
+.chevron {
+  margin-left: -1px;
+  opacity: 0.8;
+}
+
+/* Narrow bars: one menu, the title fills what is left of the left-hand group and the Share label goes. */
+.bar[data-narrow] {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px;
+  padding: 0 8px;
+}
+.bar[data-narrow] .title {
+  flex: 1 1 60px;
+  width: auto;
+  min-width: 40px;
+  text-align: left;
+}
+.bar[data-narrow] .history {
+  padding-left: 4px;
+}
+.bar[data-narrow] .btnLabel {
+  display: none;
+}
+
+@media (max-width: 1180px) {
+  .bar:not([data-narrow]) .title {
+    width: clamp(120px, 18vw, 220px);
+  }
+}
+
+/* Phones keep the title and save status visible on two rows. */
+@media (max-width: 600px) {
+  .bar[data-narrow] {
+    height: auto;
+    min-height: 102px;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    grid-template-rows: 44px 44px;
+    gap: 4px 6px;
+    padding-block: 5px;
+  }
+  .bar[data-narrow] .left {
+    display: contents;
+  }
+  .bar[data-narrow] .left > a {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .bar[data-narrow] .menuBtn {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .bar[data-narrow] .history {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+  .bar[data-narrow] .title {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    min-width: 0;
+    padding-inline: 4px;
+  }
+  .bar[data-narrow] .right {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .bar[data-narrow] .left > [role="status"],
+  .bar[data-narrow] .left > [role="alert"] {
+    grid-column: 3;
+    grid-row: 2;
+    justify-self: end;
+    width: max-content;
+    max-width: 155px;
+    padding-inline: 6px;
+    min-height: 36px;
+  }
+  .bar[data-narrow] .left > [role="status"] > span,
+  .bar[data-narrow] .left > [role="alert"] > span {
+    display: inline;
+    white-space: normal;
+    line-height: 1.4;
+  }
+}

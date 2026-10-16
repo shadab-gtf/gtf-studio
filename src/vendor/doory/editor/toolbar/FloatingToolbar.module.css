@@ -1,0 +1,84 @@
+/* The floating quick-action bar that hovers over the selected element. */
+.bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 85; /* over the workspace + rail, under popovers (--z-drawer) and dialogs */
+  display: flex;
+  max-width: calc(100vw - 16px);
+  padding: 5px 7px;
+  background: var(--ed-surface);
+  border: 1px solid var(--ed-border);
+  border-radius: 11px;
+  box-shadow:
+    0 10px 30px rgb(43 28 23 / 0.16),
+    0 2px 8px rgb(43 28 23 / 0.08);
+  animation: ft-in 140ms var(--ed-ease);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.row::-webkit-scrollbar {
+  display: none;
+}
+.row > * {
+  flex: none;
+}
+
+.divider {
+  flex: none;
+  width: 1px;
+  height: 22px;
+  margin: 0 3px;
+  background: var(--ed-border);
+}
+
+/* The Animate shortcut: icon + label, matching the editor's toolbar buttons. */
+.animate {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--ed-text);
+  font: 600 13px / 1 var(--font-sans);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--ed-dur),
+    color var(--ed-dur);
+}
+.animate:hover {
+  background: var(--ed-surface-3);
+}
+.animate:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.animateOn,
+.animateOn:hover {
+  background: var(--ed-accent-glow);
+  color: var(--ed-accent);
+}
+
+@keyframes ft-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    animation: none;
+  }
+}

@@ -1,0 +1,106 @@
+.trigger,
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.trigger:hover,
+.close:hover {
+  background: var(--surface);
+}
+.trigger:focus-visible,
+.close:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 3px;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 45%);
+  z-index: 1000;
+}
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(640px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 24px 64px rgb(0 0 0 / 20%);
+  z-index: 1001;
+}
+.heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  justify-content: space-between;
+}
+.heading h2 {
+  margin: 0 0 8px;
+  font-size: 21px;
+  letter-spacing: -0.03em;
+}
+.heading p,
+.options p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+.options > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  gap: 12px;
+}
+.options h3 {
+  font-size: 15px;
+  margin: 0;
+}
+.options button {
+  margin-top: auto;
+}
+.status,
+.error {
+  margin: 16px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.status {
+  color: var(--muted);
+  min-height: 21px;
+}
+.error {
+  color: var(--danger, #c12d32);
+}
+@media (max-width: 520px) {
+  .options {
+    grid-template-columns: 1fr;
+  }
+  .dialog {
+    padding: 20px;
+  }
+}

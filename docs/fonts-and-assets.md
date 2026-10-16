@@ -1,0 +1,21 @@
+# Fonts, templates, icons, and provenance
+
+The shipped metadata catalog contains 3,013 distinct normalized family names. This is a family count, not a count of weights or styles. `public/fonts/provenance.json` records the source totals and deduplication policy. `public/fonts/catalog.json` includes the merged catalog; `fontlibrary.json` retains the supplemental source records.
+
+Google/Fontsource contributes 2,099 families. The supplemental Font Library list contains 917 reviewed family records; duplicate normalized names leave 914 additional families in the combined catalog. Each supplemental entry records its source page, declared license, available file URLs, and attribution information. These are publisher-declared licenses, not an independent legal certification of every upload. Excluded records include unclear licenses, noncommercial licenses, generic freeware declarations, and GPL records without a font exception.
+
+Metadata sources: [Fontsource API](https://fontsource.org/docs/api/fonts), [Google Fonts](https://github.com/google/fonts), [Font Library](https://fontlibrary.org/en/catalogue). Each font exposes its own credits/license links in the picker and `/font-licenses`. Keep those notices when distributing the application. Individual licenses may require attribution or share-alike treatment when redistributing modified font files.
+
+Fontsource WOFF2 files and Font Library files download only after selection, with no referrer or credentials sent. Successful downloads cache in IndexedDB for offline reuse. External availability can change; failures leave the previous font intact and expose retry. `pnpm fonts:sync` refreshes Google metadata while preserving the supplemental reviewed catalog. Review changes and run the font integrity test before committing. The supplementary discovery scripts store their working data under ignored `artifacts/font-review`; they are maintenance tools, not browser runtime dependencies.
+
+The interface uses a self-hosted Manrope variable font with its OFL license in `public/fonts`. Custom TTF/OTF/WOFF/WOFF2 files remain on the user's device. A user must supply a font they are permitted to use. Cached font bytes persist until this origin’s browser storage is cleared.
+
+The 56 GTF templates and four-square mark are original geometric designs. Ten additional editable starter templates (13 pages) come from pinned Doory source under its Attribution Assurance License. The five accompanying photographs are CC0 according to the retained source notices. No Canva, Adobe, Microsoft, or Dropbox templates are redistributed. Demonstration statistics are illustrative.
+
+`node scripts/sync-doory-templates.mjs` reproduces the starter documents, thumbnails, photos, and notices from the pinned local checkout. `public/studio-assets/licenses/doory-templates/provenance.json` records source commit, REA evidence, counts, SHA-256 hashes, and license evidence. Upstream NOTICE has conflicting generic MIT wording; the specific template entry in THIRD_PARTY.md and the repository license are retained and treated as Attribution Assurance License. Preserve prominent creator/source attribution when distributing these templates.
+
+The editor also ships 26,119 SVG elements across 27 packs, 112 CC0 audio files, and a pinned U²-Net model. `public/studio-assets/provenance.json` and its license directory record separate pack/model provenance. A pinned model hash establishes identity, not independent clearance of its training data. See [reference audit](reference-feature-audit.md).
+
+Portable backups embed the uploaded font files actually used by a document, subject to limits. Catalog fonts are not embedded in that backup and still require their provider/cache. SVG font embedding is best effort; PPTX does not embed font files.
+
+Iconsax React uses the package's MIT license. Icons are used as interface artwork; preserve its notices and review the upstream Iconsax asset terms before repackaging an icon collection as a separate product. The shared wrapper forwards `color`, `size`, and all six variants, with Bulk as the default. Boneyard is the skeleton capture/runtime dependency. Direct package license and maintenance metadata is recorded in `dependency-licenses.json`.

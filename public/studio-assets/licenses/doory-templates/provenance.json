@@ -1,0 +1,138 @@
+{
+  "source": "https://github.com/shaongitbd/doory",
+  "commit": "96de4342093f277912ffd5c2a4137c3ca027b6b1",
+  "reaEvidence": "ev_4f62bac6e6fdd5f86c1ff5d0a0b392a7300a96125b49cf29e336f7560f655486",
+  "templateLicense": "Attribution Assurance License",
+  "photoLicense": "CC0-1.0",
+  "licenseEvidence": "THIRD_PARTY.md:192,203-215; LICENSE; NOTICE",
+  "note": "NOTICE's final MIT wording conflicts with the specific template entry in THIRD_PARTY.md. Templates retain the repository's Attribution Assurance License and required attribution.",
+  "templateCount": 10,
+  "pageCount": 13,
+  "files": [
+    {
+      "file": "bold-sale-announcement.json",
+      "bytes": 16508,
+      "sha256": "2ecb2ba385bbd9a542478b55dc52401b413a392c5125930526be88a6351bdfb5"
+    },
+    {
+      "file": "thumbs/bold-sale-announcement.webp",
+      "bytes": 61880,
+      "sha256": "5126e278b8cbf1aaac3daa0f2d62fe637397068232163e9e9fc2e39155268ea6"
+    },
+    {
+      "file": "serif-quote-card.json",
+      "bytes": 3384,
+      "sha256": "b468cc4dad6fa9bd802946598d56947e789e7ccc35fd896e292d62f328e0f74e"
+    },
+    {
+      "file": "thumbs/serif-quote-card.webp",
+      "bytes": 18850,
+      "sha256": "63a87f1c5e4bd0990f4131d37b94c1d9fcd9a3cfdde44dc5465eff69460cc090"
+    },
+    {
+      "file": "rooftop-event-story.json",
+      "bytes": 15143,
+      "sha256": "c3867cd6b72a96a420a9de4b20d624c1c74b87e1f09d562b507c635e9d76e89c"
+    },
+    {
+      "file": "thumbs/rooftop-event-story.webp",
+      "bytes": 37582,
+      "sha256": "74853ed4caa13f81ecccdadb3d1391e564225592c7ad6cfe2aa214c516356a28"
+    },
+    {
+      "file": "modern-pitch-deck.json",
+      "bytes": 46123,
+      "sha256": "840ef61f15b300abfadf85f7ee778ae7224666c19ee2e540c7d3636454a3c6a9"
+    },
+    {
+      "file": "thumbs/modern-pitch-deck.webp",
+      "bytes": 23130,
+      "sha256": "fe3aa275513e319d51edd03d0a2c47c5a14b3a84396ced8e715901a8b0b7c788"
+    },
+    {
+      "file": "night-bloom-concert-poster.json",
+      "bytes": 17519,
+      "sha256": "0cd2a7a05461261c5336c198c5b73c1d38c3c88e8de5e4248ad689fe4844d0d8"
+    },
+    {
+      "file": "thumbs/night-bloom-concert-poster.webp",
+      "bytes": 45186,
+      "sha256": "2b9f17784d407392e1f1a5e264fd525287773a34736a30301f9d917ba7541721"
+    },
+    {
+      "file": "grand-opening-flyer.json",
+      "bytes": 13955,
+      "sha256": "b60d67985aaba4a6943d2ce8e9fcad5b031ba3c0251de7d254c4b70434008a95"
+    },
+    {
+      "file": "thumbs/grand-opening-flyer.webp",
+      "bytes": 21676,
+      "sha256": "e9721e5e99809810c42ea9217c286bf61e44e4f6d5f04801174e86b9edd19e8e"
+    },
+    {
+      "file": "botanical-celebration-invitation.json",
+      "bytes": 19979,
+      "sha256": "1b6d00ca463c7409853cc359e8848501afecb0578643b471258a5fa3ee8532cb"
+    },
+    {
+      "file": "thumbs/botanical-celebration-invitation.webp",
+      "bytes": 16040,
+      "sha256": "f8b8af158043501c5f8bd07ab41b5eb320ddd957e1f87ad9c27b13fc30954eda"
+    },
+    {
+      "file": "modern-resume.json",
+      "bytes": 60182,
+      "sha256": "6c3bc9b5d8686f60fb2213f684c50a1eae81508f7d16687368e60d1aa99de64d"
+    },
+    {
+      "file": "thumbs/modern-resume.webp",
+      "bytes": 29802,
+      "sha256": "9bfda7d39f33abae4716eb71909c96053ec159edfca26d90fcd3aec105393299"
+    },
+    {
+      "file": "bold-youtube-thumbnail.json",
+      "bytes": 7098,
+      "sha256": "f651131583a59d8c554549e00ed782f8eef52c7f48de357b905f5ebb25c4a27c"
+    },
+    {
+      "file": "thumbs/bold-youtube-thumbnail.webp",
+      "bytes": 31214,
+      "sha256": "55789bcdf6b963c59138f8825f2fe7a09665bc2294009083eb04b3ce70edabd4"
+    },
+    {
+      "file": "clean-business-card.json",
+      "bytes": 14687,
+      "sha256": "ce78bc1cabd4552ae8a418ebe99da9c8eeaa59c0aa386b167d8f541a05ac3563"
+    },
+    {
+      "file": "thumbs/clean-business-card.webp",
+      "bytes": 8500,
+      "sha256": "116e874b668cd5fa47998ae5c11453c2a6e20d3655942ed38e61e87f3c25244e"
+    },
+    {
+      "file": "photos/deck-architecture.webp",
+      "bytes": 90174,
+      "sha256": "e67d4abe980c70259e619bd3ca0635ec16cf411f572916691c5064553580fb4a"
+    },
+    {
+      "file": "photos/resume-portrait.webp",
+      "bytes": 66944,
+      "sha256": "62698c5eb1b01b1488537f4c554a04f71ad813670d61c56e28ab509252998722"
+    },
+    {
+      "file": "photos/rooftop-friends.webp",
+      "bytes": 166716,
+      "sha256": "97c151b9d035082750c70ef43cc33b43209c522a530a0b2e98e6c7173a49d520"
+    },
+    {
+      "file": "photos/sale-bags.webp",
+      "bytes": 126222,
+      "sha256": "b761f279c93d532fe2866cd9087d0960a570461791cc9cf815f69a2681b3c8db"
+    },
+    {
+      "file": "photos/youtube-face.webp",
+      "bytes": 89610,
+      "sha256": "1d17a0e316e718ff3aaa1bd357ca7eeec39354f366d521b0eb224db73588ca7e"
+    }
+  ]
+}

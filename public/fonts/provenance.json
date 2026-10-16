@@ -1,0 +1,11 @@
+{
+  "sources": [
+    "https://api.fontsource.org/v1/fonts",
+    "https://fontlibrary.org/en/catalogue"
+  ],
+  "syncedAt": "2026-10-16T06:05:41.357Z",
+  "familyCount": 3013,
+  "styleCount": 11658,
+  "deduplication": "Case-insensitive alphanumeric family names. First source retained.",
+  "review": "Each additional entry retains its family page, license URL, and exact font file URL. Unknown, freeware-only and licenses without reviewed embedding terms were excluded. CC BY and CC BY-SA entries retain attribution and license links."
+}

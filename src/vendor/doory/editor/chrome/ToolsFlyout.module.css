@@ -1,0 +1,283 @@
+/* The Tools flyout: a vertical tool column, with a second column of options for tools that have them. */
+.flyout {
+  display: flex;
+  align-items: stretch;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+}
+
+.tool {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background: none;
+  color: var(--ed-text-dim);
+  cursor: pointer;
+  transition:
+    background var(--ed-dur),
+    color var(--ed-dur);
+}
+.tool:hover {
+  background: var(--ed-surface-3);
+  color: var(--ed-text);
+}
+.tool:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.toolOn,
+.toolOn:hover {
+  background: var(--ed-accent-glow);
+  color: var(--ed-accent);
+}
+.caret {
+  position: absolute;
+  top: 50%;
+  right: 3px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 4px solid currentColor;
+  transform: translateY(-50%);
+  opacity: 0.45;
+}
+
+/* ── the options column ── */
+.sub {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 212px;
+  padding: 12px;
+  border-left: 1px solid var(--ed-border);
+}
+.subLabel {
+  color: var(--ed-text-dim);
+  font: 600 var(--text-xs) / 1.2 var(--font-sans);
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.swatch {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid var(--ed-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform var(--ed-dur);
+}
+.swatch:hover {
+  transform: scale(1.08);
+}
+.swatch:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.slider input {
+  width: 100%;
+  accent-color: var(--ed-accent);
+}
+
+.subButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.subBtn {
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--ed-border);
+  border-radius: 8px;
+  background: var(--ed-surface);
+  color: var(--ed-text);
+  font: 600 var(--text-sm) / 1 var(--font-sans);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--ed-dur),
+    border-color var(--ed-dur);
+}
+.subBtn:hover {
+  border-color: var(--ed-accent);
+  background: var(--ed-accent-glow);
+  color: var(--ed-accent);
+}
+
+.shapeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.shapeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border: 1px solid var(--ed-border);
+  border-radius: 8px;
+  background: var(--ed-surface);
+  color: var(--ed-text);
+  cursor: pointer;
+  transition:
+    background var(--ed-dur),
+    border-color var(--ed-dur);
+}
+.shapeBtn:hover {
+  border-color: var(--ed-accent);
+  background: var(--ed-accent-glow);
+  color: var(--ed-accent);
+}
+
+.lineBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--ed-border);
+  border-radius: 8px;
+  background: var(--ed-surface);
+  color: var(--ed-text);
+  font: 600 var(--text-sm) / 1 var(--font-sans);
+  cursor: pointer;
+  transition:
+    background var(--ed-dur),
+    border-color var(--ed-dur);
+}
+.lineBtn:hover {
+  border-color: var(--ed-accent);
+  background: var(--ed-accent-glow);
+  color: var(--ed-accent);
+}
+
+.tableGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 3px;
+  width: 156px;
+}
+.tableCell {
+  aspect-ratio: 1;
+  border: 1px solid var(--ed-border);
+  border-radius: 3px;
+  background: var(--ed-surface);
+  cursor: pointer;
+}
+.tableCellOn {
+  border-color: var(--ed-accent);
+  background: var(--ed-accent-glow);
+}
+
+/* ── Draw: instrument strip + optional settings column ── */
+.drawWrap {
+  display: flex;
+  align-items: stretch;
+}
+.drawStrip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 6px;
+  border-left: 1px solid var(--ed-border);
+}
+.instrument {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 38px;
+  border: none;
+  border-radius: 9px;
+  background: none;
+  cursor: pointer;
+  transition: background var(--ed-dur);
+}
+.instrument:hover {
+  background: var(--ed-surface-3);
+}
+.instrument:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.drawSep {
+  width: 28px;
+  height: 1px;
+  margin: 5px 0;
+  background: var(--ed-border);
+}
+.colorDot {
+  width: 28px;
+  height: 28px;
+  margin: 3px 0;
+  border: 2px solid var(--ed-surface);
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px var(--ed-border);
+  cursor: pointer;
+}
+.colorDot:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.weightBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 36px;
+  border: none;
+  border-radius: 9px;
+  background: none;
+  color: var(--ed-text-dim);
+  cursor: pointer;
+  transition:
+    background var(--ed-dur),
+    color var(--ed-dur);
+}
+.weightBtn:hover {
+  background: var(--ed-surface-3);
+  color: var(--ed-text);
+}
+.weightBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.ctrlOn,
+.ctrlOn:hover {
+  background: var(--ed-accent-glow);
+  color: var(--ed-accent);
+}
+.drawSettings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 208px;
+  padding: 12px;
+  border-left: 1px solid var(--ed-border);
+}
+
+/* The full colour picker (solid, custom and gradients) sizes itself; the column only supplies the divider. */
+.colorColumn {
+  display: flex;
+  border-left: 1px solid var(--ed-border);
+}

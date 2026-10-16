@@ -1,0 +1,386 @@
+{
+  "reviewedAt": "2026-10-16T06:17:51.790Z",
+  "source": "Installed package manifests and the public npm registry",
+  "dependencies": [
+    {
+      "name": "@fontsource-variable/manrope",
+      "scope": "runtime",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "repository": "git+https://github.com/fontsource/font-files.git",
+      "releaseDate": "2026-07-19T03:50:41.069Z",
+      "latestVersion": "5.3.0",
+      "deprecated": null
+    },
+    {
+      "name": "@radix-ui/react-context-menu",
+      "scope": "runtime",
+      "version": "2.4.1",
+      "license": "MIT",
+      "repository": "git+https://github.com/radix-ui/primitives.git",
+      "releaseDate": "2026-10-12T21:04:19.611Z",
+      "latestVersion": "2.4.1",
+      "deprecated": null
+    },
+    {
+      "name": "@radix-ui/react-dialog",
+      "scope": "runtime",
+      "version": "1.3.1",
+      "license": "MIT",
+      "repository": "git+https://github.com/radix-ui/primitives.git",
+      "releaseDate": "2026-10-12T21:03:50.186Z",
+      "latestVersion": "1.3.1",
+      "deprecated": null
+    },
+    {
+      "name": "@radix-ui/react-dropdown-menu",
+      "scope": "runtime",
+      "version": "2.2.1",
+      "license": "MIT",
+      "repository": "git+https://github.com/radix-ui/primitives.git",
+      "releaseDate": "2026-10-12T21:02:48.671Z",
+      "latestVersion": "2.2.1",
+      "deprecated": null
+    },
+    {
+      "name": "@tanstack/react-query",
+      "scope": "runtime",
+      "version": "5.104.2",
+      "license": "MIT",
+      "repository": "git+https://github.com/TanStack/query.git",
+      "releaseDate": "2026-10-11T19:35:15.506Z",
+      "latestVersion": "5.104.3",
+      "deprecated": null
+    },
+    {
+      "name": "boneyard-js",
+      "scope": "runtime",
+      "version": "1.10.0",
+      "license": "MIT",
+      "repository": "https://github.com/0xGF/boneyard",
+      "releaseDate": "2026-08-31T14:43:02.585Z",
+      "latestVersion": "1.10.0",
+      "deprecated": null
+    },
+    {
+      "name": "iconsax-react",
+      "scope": "runtime",
+      "version": "0.0.8",
+      "license": "MIT",
+      "repository": "git+https://github.com/rendinjast/iconsax-react.git",
+      "releaseDate": "2021-12-28T23:58:26.327Z",
+      "latestVersion": "0.0.8",
+      "deprecated": null
+    },
+    {
+      "name": "idb",
+      "scope": "runtime",
+      "version": "8.0.4",
+      "license": "ISC",
+      "repository": "git://github.com/jakearchibald/idb.git",
+      "releaseDate": "2026-10-06T08:20:40.245Z",
+      "latestVersion": "8.0.4",
+      "deprecated": null
+    },
+    {
+      "name": "jspdf",
+      "scope": "runtime",
+      "version": "4.2.1",
+      "license": "MIT",
+      "repository": "https://github.com/parallax/jsPDF.git",
+      "releaseDate": "2026-03-17T11:16:14.226Z",
+      "latestVersion": "4.2.1",
+      "deprecated": null
+    },
+    {
+      "name": "konva",
+      "scope": "runtime",
+      "version": "10.9.0",
+      "license": "MIT",
+      "repository": "git://github.com/konvajs/konva.git",
+      "releaseDate": "2026-10-15T00:15:45.576Z",
+      "latestVersion": "10.9.0",
+      "deprecated": null
+    },
+    {
+      "name": "next",
+      "scope": "runtime",
+      "version": "16.4.2",
+      "license": "MIT",
+      "repository": "vercel/next.js",
+      "releaseDate": "2026-10-15T20:57:24.007Z",
+      "latestVersion": "16.4.2",
+      "deprecated": null
+    },
+    {
+      "name": "next-themes",
+      "scope": "runtime",
+      "version": "0.4.6",
+      "license": "MIT",
+      "repository": "https://github.com/pacocoursey/next-themes.git",
+      "releaseDate": "2025-03-11T21:02:05.882Z",
+      "latestVersion": "0.4.6",
+      "deprecated": null
+    },
+    {
+      "name": "pptxgenjs",
+      "scope": "runtime",
+      "version": "4.0.1",
+      "license": "MIT",
+      "repository": "git+https://github.com/gitbrent/PptxGenJS.git",
+      "releaseDate": "2025-06-26T00:05:27.597Z",
+      "latestVersion": "4.0.1",
+      "deprecated": null
+    },
+    {
+      "name": "react",
+      "scope": "runtime",
+      "version": "19.3.1",
+      "license": "MIT",
+      "repository": "https://github.com/react/react.git",
+      "releaseDate": "2026-10-14T16:47:15.290Z",
+      "latestVersion": "19.3.1",
+      "deprecated": null
+    },
+    {
+      "name": "react-dom",
+      "scope": "runtime",
+      "version": "19.3.1",
+      "license": "MIT",
+      "repository": "https://github.com/react/react.git",
+      "releaseDate": "2026-10-14T16:49:10.081Z",
+      "latestVersion": "19.3.1",
+      "deprecated": null
+    },
+    {
+      "name": "react-konva",
+      "scope": "runtime",
+      "version": "19.3.2",
+      "license": "MIT",
+      "repository": "git+ssh://git@github.com/konvajs/react-konva.git",
+      "releaseDate": "2026-10-15T01:02:55.803Z",
+      "latestVersion": "19.3.2",
+      "deprecated": null
+    },
+    {
+      "name": "zod",
+      "scope": "runtime",
+      "version": "4.6.7",
+      "license": "MIT",
+      "repository": "git+https://github.com/colinhacks/zod.git",
+      "releaseDate": "2026-10-12T16:29:37.778Z",
+      "latestVersion": "4.6.7",
+      "deprecated": null
+    },
+    {
+      "name": "zustand",
+      "scope": "runtime",
+      "version": "5.0.15",
+      "license": "MIT",
+      "repository": "git+https://github.com/pmndrs/zustand.git",
+      "releaseDate": "2026-08-13T00:39:55.466Z",
+      "latestVersion": "5.0.15",
+      "deprecated": null
+    },
+    {
+      "name": "@playwright/test",
+      "scope": "development",
+      "version": "1.64.1",
+      "license": "Apache-2.0",
+      "repository": "git+https://github.com/microsoft/playwright.git",
+      "releaseDate": "2026-10-14T11:58:13.696Z",
+      "latestVersion": "1.64.1",
+      "deprecated": null
+    },
+    {
+      "name": "@tailwindcss/postcss",
+      "scope": "development",
+      "version": "4.3.3",
+      "license": "MIT",
+      "repository": "https://github.com/tailwindlabs/tailwindcss.git",
+      "releaseDate": "2026-07-16T12:03:56.054Z",
+      "latestVersion": "4.3.3",
+      "deprecated": null
+    },
+    {
+      "name": "@testing-library/jest-dom",
+      "scope": "development",
+      "version": "7.0.1",
+      "license": "MIT",
+      "repository": "https://github.com/testing-library/jest-dom",
+      "releaseDate": "2026-08-09T23:44:33.598Z",
+      "latestVersion": "7.0.1",
+      "deprecated": null
+    },
+    {
+      "name": "@testing-library/react",
+      "scope": "development",
+      "version": "16.3.3",
+      "license": "MIT",
+      "repository": "https://github.com/testing-library/react-testing-library",
+      "releaseDate": "2026-08-27T17:41:18.735Z",
+      "latestVersion": "16.3.3",
+      "deprecated": null
+    },
+    {
+      "name": "@testing-library/user-event",
+      "scope": "development",
+      "version": "14.6.8",
+      "license": "MIT",
+      "repository": "https://github.com/testing-library/user-event",
+      "releaseDate": "2026-10-13T06:41:22.306Z",
+      "latestVersion": "14.6.8",
+      "deprecated": null
+    },
+    {
+      "name": "@types/node",
+      "scope": "development",
+      "version": "22.20.5",
+      "license": "MIT",
+      "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+      "releaseDate": "2026-10-01T22:38:10.803Z",
+      "latestVersion": "26.6.5",
+      "deprecated": null
+    },
+    {
+      "name": "@types/react",
+      "scope": "development",
+      "version": "19.3.0",
+      "license": "MIT",
+      "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+      "releaseDate": "2026-09-09T18:08:49.750Z",
+      "latestVersion": "19.3.0",
+      "deprecated": null
+    },
+    {
+      "name": "@types/react-dom",
+      "scope": "development",
+      "version": "19.3.0",
+      "license": "MIT",
+      "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+      "releaseDate": "2026-09-09T18:07:51.886Z",
+      "latestVersion": "19.3.0",
+      "deprecated": null
+    },
+    {
+      "name": "esbuild",
+      "scope": "development",
+      "version": "0.28.2",
+      "license": "MIT",
+      "repository": "git+https://github.com/evanw/esbuild.git",
+      "releaseDate": "2026-08-08T20:00:55.454Z",
+      "latestVersion": "0.28.2",
+      "deprecated": null
+    },
+    {
+      "name": "eslint",
+      "scope": "development",
+      "version": "9.39.5",
+      "license": "MIT",
+      "repository": "eslint/eslint",
+      "releaseDate": "2026-07-10T20:41:47.507Z",
+      "latestVersion": "10.12.0",
+      "deprecated": "This version is no longer supported. Please see https://eslint.org/version-support for other options."
+    },
+    {
+      "name": "eslint-config-next",
+      "scope": "development",
+      "version": "16.4.2",
+      "license": "MIT",
+      "repository": "vercel/next.js",
+      "releaseDate": "2026-10-15T20:46:42.598Z",
+      "latestVersion": "16.4.2",
+      "deprecated": null
+    },
+    {
+      "name": "fake-indexeddb",
+      "scope": "development",
+      "version": "6.2.5",
+      "license": "Apache-2.0",
+      "repository": "git://github.com/dumbmatter/fakeIndexedDB.git",
+      "releaseDate": "2025-11-07T15:23:51.459Z",
+      "latestVersion": "6.2.5",
+      "deprecated": null
+    },
+    {
+      "name": "husky",
+      "scope": "development",
+      "version": "9.1.7",
+      "license": "MIT",
+      "repository": "git+https://github.com/typicode/husky.git",
+      "releaseDate": "2024-11-18T15:28:26.026Z",
+      "latestVersion": "9.1.7",
+      "deprecated": null
+    },
+    {
+      "name": "jsdom",
+      "scope": "development",
+      "version": "26.1.0",
+      "license": "MIT",
+      "repository": "git+https://github.com/jsdom/jsdom.git",
+      "releaseDate": "2025-04-13T10:23:39.077Z",
+      "latestVersion": "30.1.3",
+      "deprecated": null
+    },
+    {
+      "name": "lint-staged",
+      "scope": "development",
+      "version": "17.6.0",
+      "license": "MIT",
+      "repository": "git+https://github.com/lint-staged/lint-staged.git",
+      "releaseDate": "2026-09-26T06:01:39.503Z",
+      "latestVersion": "17.6.0",
+      "deprecated": null
+    },
+    {
+      "name": "postcss",
+      "scope": "development",
+      "version": "8.5.30",
+      "license": "MIT",
+      "repository": "postcss/postcss",
+      "releaseDate": "2026-10-12T20:38:43.212Z",
+      "latestVersion": "8.5.30",
+      "deprecated": null
+    },
+    {
+      "name": "prettier",
+      "scope": "development",
+      "version": "3.9.10",
+      "license": "MIT",
+      "repository": "prettier/prettier",
+      "releaseDate": "2026-10-10T08:35:28.472Z",
+      "latestVersion": "3.9.10",
+      "deprecated": null
+    },
+    {
+      "name": "tailwindcss",
+      "scope": "development",
+      "version": "4.3.3",
+      "license": "MIT",
+      "repository": "https://github.com/tailwindlabs/tailwindcss.git",
+      "releaseDate": "2026-07-16T12:03:35.267Z",
+      "latestVersion": "4.3.3",
+      "deprecated": null
+    },
+    {
+      "name": "typescript",
+      "scope": "development",
+      "version": "5.9.3",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/microsoft/TypeScript.git",
+      "releaseDate": "2025-09-30T21:19:38.784Z",
+      "latestVersion": "7.0.2",
+      "deprecated": null
+    },
+    {
+      "name": "vitest",
+      "scope": "development",
+      "version": "5.0.5",
+      "license": "MIT",
+      "repository": "git+https://github.com/vitest-dev/vitest.git",
+      "releaseDate": "2026-10-15T14:29:01.396Z",
+      "latestVersion": "5.0.5",
+      "deprecated": null
+    }
+  ]
+}
