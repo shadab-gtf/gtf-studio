@@ -343,88 +343,74 @@ textarea {
 .hero-reassurance svg {
   color: var(--blue);
 }
-.hero-art {
+/* Hero marquee: three Pinterest-style columns of colourful tiles scrolling up / down / up. */
+.hero-stream {
   position: relative;
   height: 480px;
   min-width: 0;
-}
-.hero-orbit {
-  position: absolute;
-  width: 430px;
-  height: 430px;
-  background: var(--blue-soft);
-  border-radius: 50%;
-  top: 10px;
-  left: 5px;
-}
-.art-card {
-  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
   overflow: hidden;
-  border-radius: 5px;
-  box-shadow: 0 14px 32px #14223522;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 13%, #000 87%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 13%, #000 87%, transparent);
 }
-.art-card--waves {
-  width: 267px;
-  height: 267px;
-  top: 80px;
-  left: 0;
-  transform: rotate(-9deg);
-  z-index: 2;
+.hero-col {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  animation: hero-stream-up 42s linear infinite;
 }
-.art-card--bloom {
-  width: 237px;
-  height: 237px;
-  top: 0;
-  right: 0;
-  transform: rotate(9deg);
-  z-index: 1;
+.hero-col--down {
+  animation-name: hero-stream-down;
 }
-.art-card--sunday {
-  width: 185px;
-  height: 262px;
-  top: 200px;
-  right: 26px;
-  transform: rotate(7deg);
-  z-index: 3;
+.hero-tile {
+  display: block;
+  width: 100%;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  box-shadow: 0 10px 26px #1422351f;
+  flex: none;
+}
+@keyframes hero-stream-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+@keyframes hero-stream-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@media (max-width: 1023px) {
+  .hero-stream {
+    height: 380px;
+  }
+}
+@media (max-width: 767px) {
+  .hero-stream {
+    height: 300px;
+    max-width: 480px;
+    margin-inline: auto;
+    gap: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-col {
+    animation: none;
+  }
 }
 .document-preview {
   display: block;
   width: 100%;
   height: auto;
   max-height: 100%;
-}
-.hero-cursor {
-  position: absolute;
-  top: 330px;
-  left: 183px;
-  z-index: 5;
-  color: var(--blue);
-  transform: rotate(-6deg);
-}
-.hero-cursor span {
-  position: absolute;
-  left: 23px;
-  top: 25px;
-  white-space: nowrap;
-  padding: 4px 10px;
-  border-radius: 5px;
-  background: var(--blue);
-  color: white;
-  font-size: 11px;
-  font-weight: 700;
-}
-.hero-art-caption {
-  position: absolute;
-  bottom: -20px;
-  left: 30px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--muted);
-  font-size: 11px;
-}
-.hero-art-caption > span:last-child {
-  margin-left: 5px;
 }
 .color-dot {
   display: inline-block;
@@ -2526,9 +2512,6 @@ textarea {
   .hero h1 {
     font-size: 84px;
   }
-  .hero-art {
-    transform: scale(1.07);
-  }
 }
 @media (max-width: 1250px) {
   .format-grid {
@@ -2552,8 +2535,8 @@ textarea {
   .editor-inspector {
     width: 215px;
   }
-  .hero-art {
-    transform: scale(0.92);
+  .hero-stream {
+    transform: scale(0.96);
     transform-origin: center;
   }
   .demo-body {
@@ -2596,12 +2579,6 @@ textarea {
   }
   .hero-copy > p {
     font-size: 15px;
-  }
-  .hero-art {
-    height: 400px;
-    transform: scale(0.8);
-    width: 480px;
-    transform-origin: left center;
   }
   .hero {
     overflow: hidden;
@@ -2798,41 +2775,6 @@ textarea {
     font-size: 10px;
     margin-top: 18px;
     gap: 16px;
-  }
-  .hero-art {
-    width: 100%;
-    max-width: 470px;
-    height: auto;
-    aspect-ratio: 470 / 445;
-    transform: none;
-    margin: 22px auto 16px;
-  }
-  .hero-orbit {
-    width: 91.5%;
-    height: auto;
-    aspect-ratio: 1;
-  }
-  .hero-art .art-card--waves {
-    width: 56.8%;
-    height: auto;
-    aspect-ratio: 1;
-    top: 18%;
-  }
-  .hero-art .art-card--bloom {
-    width: 50.4%;
-    height: auto;
-    aspect-ratio: 1;
-  }
-  .hero-art .art-card--sunday {
-    width: 39.4%;
-    height: auto;
-    aspect-ratio: 185 / 262;
-    top: 45%;
-    right: 5.5%;
-  }
-  .hero-cursor {
-    top: 74%;
-    left: 39%;
   }
   .hero-copy {
     max-width: 550px;

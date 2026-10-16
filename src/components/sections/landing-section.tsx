@@ -7,7 +7,6 @@ import {
   CloudOff,
   Download,
   Layers,
-  MousePointer2,
   Play,
   Plus,
   Redo2,
@@ -22,6 +21,70 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { InstallButton } from "@/features/pwa/install-prompt";
 import { DocumentPreview } from "@/core/renderer/document-preview";
 import type { StudioCatalog } from "@/types/studio";
+
+type HeroTile = { bg: string; h: number };
+
+/**
+ * Three Pinterest-style columns of colourful placeholder tiles that scroll up / down / up. For now the tiles are
+ * warm and cold gradients; swap each `bg` for an image later. Purely decorative, so the marquee is aria-hidden.
+ */
+const HERO_COLUMNS: { dir: "up" | "down"; dur: number; tiles: HeroTile[] }[] = [
+  {
+    dir: "up",
+    dur: 42,
+    tiles: [
+      { bg: "linear-gradient(135deg, #ff7a59, #ff3d77)", h: 190 },
+      { bg: "linear-gradient(135deg, #5b8def, #8b5cf6)", h: 150 },
+      { bg: "linear-gradient(135deg, #34d399, #22d3ee)", h: 214 },
+      { bg: "linear-gradient(135deg, #ffb648, #ff6a3d)", h: 158 },
+      { bg: "linear-gradient(135deg, #f472b6, #db2777)", h: 182 },
+    ],
+  },
+  {
+    dir: "down",
+    dur: 34,
+    tiles: [
+      { bg: "linear-gradient(135deg, #4f9dff, #2bc2e4)", h: 164 },
+      { bg: "linear-gradient(135deg, #ff6286, #d6457d)", h: 204 },
+      { bg: "linear-gradient(135deg, #a78bfa, #7c3aed)", h: 150 },
+      { bg: "linear-gradient(135deg, #ffd152, #ff8a3d)", h: 192 },
+      { bg: "linear-gradient(135deg, #2dd4bf, #3b82f6)", h: 170 },
+    ],
+  },
+  {
+    dir: "up",
+    dur: 48,
+    tiles: [
+      { bg: "linear-gradient(135deg, #fb7185, #e11d48)", h: 172 },
+      { bg: "linear-gradient(135deg, #38bdf8, #6366f1)", h: 204 },
+      { bg: "linear-gradient(135deg, #fca5a5, #f97316)", h: 150 },
+      { bg: "linear-gradient(135deg, #818cf8, #a855f7)", h: 190 },
+      { bg: "linear-gradient(135deg, #f59e0b, #ef4444)", h: 160 },
+    ],
+  },
+];
+
+function HeroMarquee() {
+  return (
+    <div className="hero-stream" aria-hidden="true">
+      {HERO_COLUMNS.map((col, c) => (
+        <div
+          key={c}
+          className={`hero-col hero-col--${col.dir}`}
+          style={{ animationDuration: `${col.dur}s` }}
+        >
+          {[...col.tiles, ...col.tiles].map((tile, i) => (
+            <span
+              key={i}
+              className="hero-tile"
+              style={{ background: tile.bg, height: tile.h }}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export function LandingSection({ catalog }: { catalog: StudioCatalog }) {
   const [bloom, waves, sunday, ordinary, perspective] = catalog.templates;
@@ -48,7 +111,7 @@ export function LandingSection({ catalog }: { catalog: StudioCatalog }) {
           <div className="hero-copy">
             <h1>
               A little idea.
-              <br />A world of
+              <br />A world of{" "}
               <br />
               possibilities.
             </h1>
@@ -81,40 +144,7 @@ export function LandingSection({ catalog }: { catalog: StudioCatalog }) {
               </span>
             </div>
           </div>
-          <div
-            className="hero-art"
-            aria-label="Original designs made with GTF Studio"
-          >
-            <div className="hero-orbit" />
-            <div className="art-card art-card--waves">
-              <DocumentPreview
-                document={waves.document}
-                page={waves.document.pages[0]}
-              />
-            </div>
-            <div className="art-card art-card--bloom">
-              <DocumentPreview
-                document={bloom.document}
-                page={bloom.document.pages[0]}
-              />
-            </div>
-            <div className="art-card art-card--sunday">
-              <DocumentPreview
-                document={sunday.document}
-                page={sunday.document.pages[0]}
-              />
-            </div>
-            <div className="hero-cursor">
-              <MousePointer2 fill="currentColor" size={27} />
-              <span>Made by you</span>
-            </div>
-            <div className="hero-art-caption">
-              <span className="color-dot pink" />
-              <span className="color-dot blue" />
-              <span className="color-dot green" />
-              <span>Every idea has a place here.</span>
-            </div>
-          </div>
+          <HeroMarquee />
         </section>
         <section
           className="format-strip section-container"
