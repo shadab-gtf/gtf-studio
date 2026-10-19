@@ -1,0 +1,95 @@
+/* Public, chrome-free design viewer: only the artwork plus a minimal zoom control. */
+.viewer {
+  position: fixed;
+  inset: 0;
+  overflow: auto;
+  background: var(--canvas, #f5f7fa);
+  padding: clamp(16px, 4vw, 48px);
+  -webkit-overflow-scrolling: touch;
+}
+.pages {
+  width: calc(min(100%, 1120px) * var(--zoom, 1));
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 3vw, 36px);
+}
+.page {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 12px 44px rgb(17 33 53 / 20%);
+}
+.page :global(.document-preview) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.controls {
+  position: fixed;
+  left: 50%;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px;
+  border-radius: 999px;
+  background: var(--paper, #fff);
+  border: 1px solid var(--line, #dce2e8);
+  box-shadow: 0 8px 28px rgb(17 33 53 / 22%);
+}
+.btn,
+.pct {
+  min-height: 40px;
+  border: 0;
+  background: transparent;
+  color: var(--ink, #17212b);
+  font: inherit;
+  font-weight: 650;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.btn {
+  width: 40px;
+  font-size: 20px;
+  line-height: 1;
+}
+.pct {
+  min-width: 62px;
+  font-size: 13px;
+}
+.btn:hover,
+.pct:hover {
+  background: var(--canvas, #eef2f6);
+}
+.btn:focus-visible,
+.pct:focus-visible {
+  outline: 3px solid var(--blue, #087ca9);
+  outline-offset: 2px;
+}
+.pageInfo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  margin-left: 2px;
+  border-left: 1px solid var(--line, #dce2e8);
+  color: var(--muted, #586572);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.message {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--canvas, #f5f7fa);
+  color: var(--muted, #586572);
+  text-align: center;
+  font-size: 14px;
+}
