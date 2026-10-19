@@ -10,6 +10,10 @@ import type { DoryDocument } from "@/vendor/doory/types/document";
 import { ServiceError } from "@/services/errors/service-error";
 import { studioDocumentSchema } from "@/core/document/studio-schema";
 import { blobDataUrl, toStudioDocument, withStudioDocument } from "@/features/studio/document-bridge";
+import { rasterizeShareDocument } from "@/features/studio/share-render";
+import { designShareUrl } from "@/lib/share/share-document";
+import type { LoadContext } from "@/vendor/doory/editor/engine/serialization";
+import type { FontUse } from "@/vendor/doory/editor/engine/docOps";
 import { assertImageDimensions } from "@/features/assets/image-limits";
 import { deleteProjectAuxiliaryData, EDITOR_DATABASE } from "./storage-cleanup";
 
@@ -74,11 +78,27 @@ export function createStudioEditorAdapter(project: Project, catalog: StudioCatal
     if (!found) throw new Error("A local asset is missing. Upload the file again.");
     return objectUrl(id, found.blob);
   };
-  // Frontend-only share links: stored on this device and opened read-only via `?view=1` (no server, so they work in this browser).
+  // Frontend-only share links: stored on this device (no server). A "view" link is a self-contained snapshot that opens
+  // on any device; "comment"/"edit" links open the editor read-only and therefore only resolve in this browser.
   const SHARES_KEY = `gtf:studio:shares:${project.id}`;
   const readShares = (): ShareLink[] => { try { const raw = localStorage.getItem(SHARES_KEY); return raw ? (JSON.parse(raw) as ShareLink[]) : []; } catch { return []; } };
   const writeShares = (links: ShareLink[]) => { try { localStorage.setItem(SHARES_KEY, JSON.stringify(links)); } catch { /* storage may be unavailable */ } };
   const shareUrl = (role: ShareRole, token: string): string => (role === "edit" ? `/editor/${project.id}` : `/editor/${project.id}?view=1&t=${token}`);
+  // Fonts a shared snapshot needs must be registered before the off-screen canvas rasterises its text, or it falls back to a system face.
+  const ensureShareFonts = async (fonts: FontUse[]): Promise<void> => {
+    const catalog = await services.fonts.catalog().catch(() => [] as CatalogFont[]);
+    await Promise.all(fonts.map(async use => {
+      const font = catalog.find(item => item.family === use.family);
+      if (!font) return;
+      const weight = use.weight === "bold" ? 700 : use.weight === "normal" ? 400 : Number.parseInt(use.weight, 10) || 400;
+      const style = use.style === "normal" ? "normal" : "italic";
+      try { await services.fonts.load(fontChoice(font, weight, style)); } catch { /* best effort: a missing font simply renders in a fallback */ }
+    }));
+  };
+  const shareLoadContext: LoadContext = { resolveSrc, ensureFonts: ensureShareFonts };
+  // A "view" link carries a rasterised snapshot of the live design, so the recipient sees only the artwork — no editor, no device lookup.
+  const buildShareUrl = async (role: ShareRole, token: string): Promise<string> =>
+    role === "view" ? designShareUrl(await rasterizeShareDocument(readDocument(), shareLoadContext)) : shareUrl(role, token);
   const adapter: EditorAdapter = {
     async save(input) {
       const document = studioDocumentSchema.parse(input.document);
@@ -157,7 +177,7 @@ export function createStudioEditorAdapter(project: Project, catalog: StudioCatal
         async list() { return readShares(); },
         async create(input) {
           const token = crypto.randomUUID().replace(/-/g, "");
-          const link: ShareLink = { id: crypto.randomUUID(), token, role: input.role, url: shareUrl(input.role, token), is_active: true, expires_at: input.expires_at ?? null, has_password: !!input.password, created_at: new Date().toISOString() };
+          const link: ShareLink = { id: crypto.randomUUID(), token, role: input.role, url: await buildShareUrl(input.role, token), is_active: true, expires_at: input.expires_at ?? null, has_password: !!input.password, created_at: new Date().toISOString() };
           writeShares([link, ...readShares()]);
           return link;
         },
@@ -170,7 +190,7 @@ export function createStudioEditorAdapter(project: Project, catalog: StudioCatal
           const next: ShareLink = {
             ...current,
             role,
-            url: patch.role ? shareUrl(role, current.token) : current.url,
+            url: patch.role ? await buildShareUrl(role, current.token) : current.url,
             is_active: patch.is_active ?? current.is_active,
             expires_at: patch.expires_at !== undefined ? patch.expires_at : current.expires_at,
             has_password: patch.password !== undefined ? patch.password !== null : current.has_password,
