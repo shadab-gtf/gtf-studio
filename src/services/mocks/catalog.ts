@@ -1,5 +1,7 @@
 import { createTemplateCollection, formats } from "./template-collection";
 import { createDooryTemplates } from "./doory-templates";
+import { createReferenceTemplates } from "./reference-templates";
+import { createEditorialTemplates, editorialFormats } from "./editorial-templates";
 import type {
   CanvasElement,
   CreativeDocument,
@@ -285,9 +287,11 @@ export const templates: Template[] = [
   },
 ];
 
+templates.push(...createReferenceTemplates());
+templates.push(...createEditorialTemplates());
 templates.push(...createTemplateCollection());
 templates.push(...createDooryTemplates());
 
 export async function getMockCatalog(): Promise<StudioCatalog> {
-  return structuredClone({ templates, formats });
+  return structuredClone({ templates, formats: [...formats, ...editorialFormats(formats)].map(format => ({...format, ...(format.description.includes('300 dpi') ? {printDpi:300} : {})})) });
 }

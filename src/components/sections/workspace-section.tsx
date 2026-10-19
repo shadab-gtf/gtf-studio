@@ -22,6 +22,8 @@ import { SkeletonBoundary } from "@/components/feedback/skeleton-boundary";
 import { ProjectGridSkeleton } from "@/components/feedback/skeletons";
 import { EmptyState, ErrorState } from "@/components/feedback/states";
 import { DocumentPreview } from "@/core/renderer/document-preview";
+import { TemplateArtwork } from "@/components/ui/template-artwork";
+import { featuredTemplates } from "@/lib/utils/featured-templates";
 import {
   useCreateProject,
   useProjectActions,
@@ -41,7 +43,14 @@ export function WorkspaceSection({
   const params = useSearchParams();
   const [search, setSearch] = useState("");
   const deferredSearch = useDeferredValue(search);
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState(
+    () => params.get("category") ?? "All",
+  );
+  const [collection, setCollection] = useState(
+    catalog.templates.some((item) => item.collection === "reference")
+      ? "reference"
+      : "all",
+  );
   const [status, setStatus] = useState<Project["status"]>(
     view === "trash" ? "trashed" : "active",
   );
@@ -63,11 +72,20 @@ export function WorkspaceSection({
     templates: "Find your starting point.",
     trash: "A second chance for your ideas.",
   }[view];
-  const filteredTemplates = catalog.templates.filter(
+  const collectionTemplates =
+    collection === "reference"
+      ? catalog.templates.filter((item) => item.collection === "reference")
+      : catalog.templates;
+  const filteredTemplates = collectionTemplates.filter(
     (item) =>
       (category === "All" || item.category === category) &&
       item.title.toLowerCase().includes(deferredSearch.toLowerCase()),
   );
+  const featured = featuredTemplates(catalog.templates);
+  const dashboardTemplates =
+    category === "All"
+      ? featured
+      : collectionTemplates.filter((item) => item.category === category);
   return (
     <>
       <div className="workspace-title">
@@ -109,17 +127,78 @@ export function WorkspaceSection({
                 Find a template <ArrowRight size={16} />
               </Link>
             </div>
-            <div className="welcome-art">
-              <DocumentPreview
-                document={catalog.templates[0].document}
-                page={catalog.templates[0].document.pages[0]}
-              />
-              <DocumentPreview
-                document={catalog.templates[1].document}
-                page={catalog.templates[1].document.pages[0]}
-              />
+            <div className="welcome-art" aria-hidden="true">
+              {featured.slice(0, 2).map((item) => (
+                <TemplateArtwork
+                  key={item.id}
+                  template={item}
+                  sizes="180px"
+                  loading="eager"
+                />
+              ))}
             </div>
           </div>
+          <section
+            className="dashboard-templates"
+            aria-labelledby="dashboard-templates-heading"
+          >
+            <div className="collection-toolbar">
+              <h2 id="dashboard-templates-heading">
+                Templates for your next idea
+              </h2>
+              <Link
+                href={
+                  category === "All"
+                    ? "/templates"
+                    : `/templates?category=${encodeURIComponent(category)}`
+                }
+                className="text-link"
+              >
+                Browse all templates <ArrowRight size={17} aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="filter-tabs" aria-label="Template categories">
+              {[
+                "All",
+                ...new Set(collectionTemplates.map((item) => item.category)),
+              ].map((item) => (
+                <button
+                  key={item}
+                  aria-pressed={category === item}
+                  onClick={() => setCategory(item)}
+                >
+                  {item === "All" ? "Featured" : item}
+                </button>
+              ))}
+            </div>
+            <p className="dashboard-template-count" role="status">
+              {category === "All"
+                ? "Featured templates"
+                : `${category} · ${dashboardTemplates.length} templates`}
+            </p>
+            <div className="template-grid dashboard-template-grid">
+              {dashboardTemplates.map((item) => (
+                <button
+                  key={item.id}
+                  className="template-card"
+                  onClick={() => setTemplate(item)}
+                >
+                  <div className="template-card-art">
+                    <TemplateArtwork
+                      template={item}
+                      sizes="(max-width: 767px) 43vw, 22vw"
+                    />
+                  </div>
+                  <strong>{item.title}</strong>
+                  <span>{item.category}</span>
+                  <span>
+                    {item.sizeLabel ??
+                      `${item.document.width} × ${item.document.height} px`}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </section>
           <div className="format-grid">
             {catalog.formats.slice(0, 5).map((item, index) => {
               const Icon = [
@@ -215,11 +294,36 @@ export function WorkspaceSection({
       </div>
       {view === "templates" ? (
         <>
-          <p className="muted">Includes starter templates by <a href="https://github.com/shaongitbd/doory" target="_blank" rel="noreferrer">Siam, creator and maintainer of Doory</a>.</p>
+          <p className="muted">
+            Includes starter templates by{" "}
+            <a
+              href="https://github.com/shaongitbd/doory"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Siam, creator and maintainer of Doory
+            </a>
+            .
+          </p>
+          <label className="template-collection-picker">
+            Collection
+            <select
+              value={collection}
+              onChange={(event) => {
+                setCollection(event.target.value);
+                setCategory("All");
+              }}
+            >
+              <option value="reference">
+                Reference collection · 85 designs
+              </option>
+              <option value="all">All templates</option>
+            </select>
+          </label>
           <div className="filter-tabs" aria-label="Template categories">
             {[
               "All",
-              ...new Set(catalog.templates.map((item) => item.category)),
+              ...new Set(collectionTemplates.map((item) => item.category)),
             ].map((item) => (
               <button
                 key={item}
@@ -236,11 +340,18 @@ export function WorkspaceSection({
                 className="template-card blank-template"
                 onClick={() => {
                   setFormat(
-                    catalog.formats.find((item) =>
-                      item.title
-                        .toLowerCase()
-                        .startsWith(category.toLowerCase()),
-                    ),
+                    catalog.formats.find(
+                      (item) =>
+                        item.id ===
+                        collectionTemplates.find(
+                          (template) => template.category === category,
+                        )?.formatId,
+                    ) ??
+                      catalog.formats.find((item) =>
+                        item.title
+                          .toLowerCase()
+                          .startsWith(category.toLowerCase()),
+                      ),
                   );
                   setCreating(true);
                 }}
@@ -252,22 +363,23 @@ export function WorkspaceSection({
                 <strong>Your idea, from scratch</strong>
                 <span>Choose a standard or custom size</span>
               </button>
-              {filteredTemplates.map((item) => (
+              {filteredTemplates.map((item, index) => (
                 <button
                   className="template-card"
                   key={item.id}
                   onClick={() => setTemplate(item)}
                 >
                   <div className={`template-card-art template-art--${item.id}`}>
-                    <DocumentPreview
-                      document={item.document}
-                      page={item.document.pages[0]}
+                    <TemplateArtwork
+                      template={item}
+                      sizes="(max-width: 540px) 100vw, (max-width: 900px) 50vw, 25vw"
+                      loading={index === 0 ? "eager" : "lazy"}
                     />
                   </div>
                   <strong>{item.title}</strong>
                   <span>
-                    {item.category} · {item.document.width} ×{" "}
-                    {item.document.height}
+                    {item.sizeLabel ??
+                      `${item.category} · ${item.document.width} × ${item.document.height}`}
                   </span>
                 </button>
               ))}

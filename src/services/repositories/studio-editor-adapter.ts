@@ -1,4 +1,5 @@
 import { templateThumbnail } from "@/features/studio/template-thumbnail";
+import { bundledFontSource } from "../mocks/bundled-fonts";
 import { openDB, type DBSchema } from "idb";
 import type { StudioServices } from "@/services/contracts/studio-service";
 import type { FontFamily as CatalogFont, FontChoice } from "@/services/contracts/font-service";
@@ -48,7 +49,7 @@ export function createStudioEditorAdapter(project: Project, catalog: StudioCatal
   const fontChoice = (font: CatalogFont, weight = 400, style = "normal"): FontChoice => ({ id: font.id, family: font.family, weight: [...font.weights].sort((a,b) => Math.abs(a-weight)-Math.abs(b-weight))[0] ?? 400, style: style === "italic" && font.styles.includes("italic") ? "italic" : "normal", subset: font.defSubset });
   const mapFont = (font: CatalogFont): FontFamily => ({
     id: font.id, family: font.family, category: font.category === "serif" || font.category === "display" || font.category === "handwriting" || font.category === "monospace" ? font.category : "sans-serif", scripts: font.subsets, is_variable: false, is_user_font: font.id.startsWith("upload-"), popularity: font.family === "Manrope" ? 1 : 100,
-    variants: font.files ?? (font.id.startsWith("upload-") ? [] : font.weights.flatMap(weight => font.styles.map(style => ({ weight, style, url: `https://cdn.jsdelivr.net/fontsource/fonts/${font.id}@latest/${font.defSubset}-${weight}-${style}.woff2` })))),
+    variants: font.files ?? (font.id.startsWith("upload-") ? [] : font.weights.flatMap(weight => font.styles.map(style => ({ weight, style, url: bundledFontSource(fontChoice(font, weight, style)) ?? `https://cdn.jsdelivr.net/fontsource/fonts/${font.id}@latest/${font.defSubset}-${weight}-${style}.woff2` })))),
     load: async (weight, style) => { await services.fonts.load(fontChoice(font, weight, style)); },
     file: async (weight, style) => objectUrl(`font:${font.id}:${weight}:${style}`, await services.fonts.file(fontChoice(font, weight, style))),
   });

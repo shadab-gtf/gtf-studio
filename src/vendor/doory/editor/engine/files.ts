@@ -24,5 +24,5 @@ export function pickFiles(accept: string, multiple: boolean): Promise<File[]> {
 /** Image files out of a drop/paste `DataTransfer`. */
 export function imageFilesFrom(data: DataTransfer | null): File[] {
   if (!data) return []
-  return [...data.files].filter((f) => f.type.startsWith('image/'))
+  return [...data.files].filter((f) => f.type.startsWith('image/') || (!f.type && /\.svg$/i.test(f.name)))
 }

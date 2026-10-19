@@ -4,7 +4,7 @@
  * chrome applies and shows: a value outside is clamped when the field is committed, and the range is the field's
  * tooltip and accessible description.
  */
-import { CHAR_SPACING_RANGE } from '../engine/numbers'
+import { CHAR_SPACING_RANGE, FONT_SIZE_RANGE } from '../engine/numbers'
 import { pxToUnit, unitDecimals } from '../engine/units'
 import { t } from '../strings'
 import { type DocUnit, MAX_DIMENSION_PX } from '@/vendor/doory/types/document'
@@ -17,7 +17,7 @@ export interface Limit {
   readonly decimals: number
 }
 
-export const FONT_SIZE: Limit = { min: 8, max: 200, step: 1, decimals: 0 }
+export const FONT_SIZE: Limit = { min: 8, max: FONT_SIZE_RANGE[1], step: 1, decimals: 0 }
 export const LINE_HEIGHT: Limit = { min: 0.5, max: 3, step: 0.1, decimals: 1 }
 /** In thousandths of an em, the unit Fabric stores. This is what the engine accepts. */
 export const LETTER_SPACING: Limit = { min: CHAR_SPACING_RANGE[0], max: CHAR_SPACING_RANGE[1], step: 10, decimals: 0 }

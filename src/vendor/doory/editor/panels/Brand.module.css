@@ -120,11 +120,13 @@
 }
 .logos {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 .logo {
   display: flex;
+  width: 100%;
+  min-width: 0;
   align-items: center;
   justify-content: center;
   aspect-ratio: 1 / 1;

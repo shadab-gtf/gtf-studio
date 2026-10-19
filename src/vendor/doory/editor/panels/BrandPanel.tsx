@@ -17,7 +17,7 @@ import { Button } from '../ui/Button'
 import { ColorPicker } from '../ui/ColorPicker'
 import { Popover } from '../ui/Popover'
 import { Skeleton } from '../ui/Skeleton'
-import { BRAND_ROLES, MAX_BRAND_COLORS, MAX_BRAND_LOGOS, assetToRef, emptyKit, fontOf, pickKit, refToAsset, upsertKit, withColor, withFont, withLogo, withoutColor, withoutLogo } from './brandOps'
+import { BRAND_ROLES, MAX_BRAND_COLORS, MAX_BRAND_LOGOS, assetToRef, emptyKit, fontOf, logoPreviewSource, pickKit, refToAsset, upsertKit, withColor, withFont, withLogo, withoutColor, withoutLogo } from './brandOps'
 import { setBrandPalette } from './brandPalette'
 import { CategoryMenu, type CategoryEntry } from './library'
 import styles from './Brand.module.css'
@@ -50,12 +50,12 @@ function BrandGate({ onDone }: { onDone: () => void }) {
 
 function LogoThumb({ kit, logoId, onUse, onRemove }: { kit: BrandKit; logoId: string; onUse: () => void; onRemove: () => void }) {
   const logo = kit.logos.find((l) => l.id === logoId)
-  const url = useResolvedSrc(logo?.thumb_url || logo?.url || '')
+  const url = useResolvedSrc(logoPreviewSource(logo))
   if (!logo) return null
   return (
     <div className={styles.swatchWrap}>
       <button type="button" className={styles.logo} aria-label={t.brand.addLogoToDesign(logo.name)} title={logo.name} data-testid="brand-logo" onClick={onUse}>
-        {url ? <PreviewImage src={url} alt="" draggable={false} /> : <Skeleton width={40} height={40} radius={6} />}
+        {url ? <PreviewImage src={url} alt="" width={80} height={80} draggable={false} /> : <Skeleton width={40} height={40} radius={6} />}
       </button>
       <button type="button" className={styles.remove} aria-label={t.brand.removeLogo(logo.name)} onClick={onRemove}>
         <X size={10} aria-hidden="true" />

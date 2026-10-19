@@ -1,4 +1,4 @@
-import { Trash2 } from '@/features/studio/icons'
+import { Plus, Trash2 } from '@/features/studio/icons'
 import { useRef, useState } from 'react'
 import type { GradientStop } from '@/vendor/doory/types/document'
 import { type FillSpec, DEFAULT_STOPS, gradientCss, sortStops } from '../engine/objects/fills'
@@ -155,6 +155,14 @@ function GradientEditor({
             onFocus={() => onSelect(i)}
           />
         ))}
+      </div>
+      <div className={styles.controls}>
+        <Button size="sm" variant="ghost" icon={<Plus size={14} />} disabled={stops.length >= 8} onClick={() => {
+          const sorted = sortStops(stops)
+          const gap = sorted.slice(0, -1).reduce((best, stop, i) => sorted[i + 1].offset - stop.offset > best.end - best.start ? { start: stop.offset, end: sorted[i + 1].offset, color: stop.color } : best, { start: 0, end: 0, color: sorted[0].color })
+          update([...stops, { offset: (gap.start + gap.end) / 2, color: gap.color }])
+          onSelect(stops.length)
+        }}>Add color stop</Button>
       </div>
       <div className={styles.controls}>
         {value.kind === 'linear' ? <NumberField label={t.fill.angle} value={value.angle} min={0} max={359} step={1} suffix="°" showLabel onChange={(angle) => onChange({ ...value, angle })} width={120} /> : <span />}

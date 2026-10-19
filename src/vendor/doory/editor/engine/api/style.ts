@@ -410,6 +410,11 @@ export class StyleApi {
     this.each((o) => applyColorMap(o, undefined), t.history.resetColors)
   }
 
+  setElementBackground(color: string): void {
+    this.each(o => { if (asDory(o).elementId) o.set('backgroundColor', color) }, 'Change SVG background', 'element-background')
+    this.engine.rememberColor(normalizeColor(color))
+  }
+
   /** Sets or clears a hyperlink. Only http(s) addresses are accepted; anything else is ignored. */
   setLink(url: string | null): void {
     const safe = url === null ? null : safeLinkUrl(url)

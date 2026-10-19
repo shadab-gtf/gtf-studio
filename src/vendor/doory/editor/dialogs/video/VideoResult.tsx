@@ -19,7 +19,9 @@ export function VideoResult({ result, url }: VideoResultProps) {
   const [unplayable, setUnplayable] = useState(false)
   const root = useRef<HTMLDivElement>(null)
   // On a narrow screen the settings above the result fill the dialog: bring the result into view.
-  useEffect(() => root.current?.scrollIntoView?.({ block: 'nearest' }), [])
+  useEffect(() => {
+    root.current?.scrollIntoView?.({ block: 'nearest' })
+  }, [])
   return (
     <div ref={root} className={styles.result} data-testid="video-result" data-format={result.format} data-width={result.width} data-height={result.height} data-duration={result.durationMs} data-frames={result.frames}>
       <div className={styles.resultHead}>

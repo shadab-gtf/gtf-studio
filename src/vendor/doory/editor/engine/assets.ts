@@ -5,6 +5,7 @@
 import type { AssetRef, EditorAdapter } from '@/vendor/doory/types/adapter'
 import type { DocObject, DoryDocument } from '@/vendor/doory/types/document'
 import { walkObjects } from './docOps'
+import { isSvgUpload, prepareSvgUpload, SvgUploadError } from '@/features/assets/svg-upload'
 
 export const ACCEPTED_IMAGE_TYPES = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif', 'image/svg+xml'] as const
 export const MAX_UPLOAD_BYTES = 25 * 1024 * 1024
@@ -53,8 +54,15 @@ export class AssetManager {
   }
 
   async upload(file: File | Blob, name?: string): Promise<AssetRef> {
-    validateImageFile(file)
-    return this.adapter.uploadAsset(file, name ? { name } : undefined)
+    try {
+      const prepared = isSvgUpload(file, name) ? await prepareSvgUpload(file) : file
+      validateImageFile(prepared)
+      const assetName = name ?? (file instanceof File ? file.name : undefined)
+      return await this.adapter.uploadAsset(prepared, assetName ? { name: assetName } : undefined)
+    } catch (error) {
+      if (error instanceof SvgUploadError) throw new UploadError(error.message)
+      throw error
+    }
   }
 
   /** Uploads the bytes behind a `data:`/`blob:` URL once and returns the durable reference. */

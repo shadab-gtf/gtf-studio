@@ -3,13 +3,19 @@
  * preview in the Download dialog and (as constants) the print server in `apps/exports/layout.py`, so what the dialog
  * draws is what the PDF has.
  *
- * All lengths are CSS px (96 per inch) unless the name says otherwise. A printed page ("sheet") is the trim size plus the
+ * Lengths use document pixels at its declared print DPI (96 by default). A printed page ("sheet") is the trim size plus the
  * bleed on every side plus, with crop marks, a slug that carries the marks:
  *
  *   sheet = slug | bleed | trim | bleed | slug
  */
 import type { PageSize } from '../docOps'
 import { mmToPx } from '../units'
+import type { DoryDocument } from '@/vendor/doory/types/document'
+
+export function documentPrintDpi(document: Pick<DoryDocument, 'meta'>): number {
+  const dpi = document.meta?.printDpi
+  return typeof dpi === 'number' && Number.isFinite(dpi) && dpi >= 72 && dpi <= 1200 ? dpi : 96
+}
 
 /** The most bleed a request may ask for (the server refuses more). */
 export const MAX_BLEED_MM = 10
@@ -35,9 +41,9 @@ export interface PrintGeometry {
 
 export type Segment = readonly [x1: number, y1: number, x2: number, y2: number]
 
-export function printGeometry(size: PageSize, bleedMm: number, cropMarks: boolean): PrintGeometry {
-  const bleed = mmToPx(Math.max(0, bleedMm))
-  const slug = cropMarks ? mmToPx(MARK_GAP_MM + MARK_LENGTH_MM) : 0
+export function printGeometry(size: PageSize, bleedMm: number, cropMarks: boolean, dpi = 96): PrintGeometry {
+  const bleed = mmToPx(Math.max(0, bleedMm)) * dpi / 96
+  const slug = cropMarks ? mmToPx(MARK_GAP_MM + MARK_LENGTH_MM) * dpi / 96 : 0
   const margin = bleed + slug
   return {
     width: size.width,

@@ -44,7 +44,7 @@ test("browse categories, create a ten-slide deck, and present", async ({
 }) => {
   await page.goto("/templates");
   await page.getByRole("button", { name: "Presentation", exact: true }).click();
-  await page.getByRole("button", { name: /Electric presentation/ }).click();
+  await page.getByRole("button", { name: /Creative Brief/ }).click();
   await expect(page.getByRole("dialog")).toContainText("10 pages");
   await page.getByRole("button", { name: "Make it yours" }).click();
   await waitForEditor(page);

@@ -48,7 +48,13 @@ export function assetToRef(a: Asset): AssetRef {
 
 /** An asset the server has not described yet; only its id is sent when the kit is saved. */
 export function refToAsset(ref: AssetRef): Asset {
-  return { id: ref.id, kind: ref.kind, name: ref.name, url: ref.url, thumb_url: ref.thumbUrl, width: ref.width, height: ref.height, size: 0, mime: '', tags: [], attribution: null, created_at: '' }
+  return { id: ref.id, kind: ref.kind, name: ref.name, url: ref.url, thumb_url: ref.thumbUrl.startsWith('blob:') ? ref.url : ref.thumbUrl, width: ref.width, height: ref.height, size: 0, mime: '', tags: [], attribution: null, created_at: '' }
+}
+
+/** Older kits may contain a thumbnail URL from an editor session that has closed. */
+export function logoPreviewSource(logo: Asset | undefined): string {
+  if (!logo) return ''
+  return !logo.thumb_url || logo.thumb_url.startsWith('blob:') ? logo.url : logo.thumb_url
 }
 
 export function withLogo(kit: BrandKit, logo: Asset): BrandKit {

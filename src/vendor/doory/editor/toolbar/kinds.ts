@@ -11,5 +11,5 @@ function collectColors(obj: Record<string, unknown>, out: Set<string>): void {
 export function elementColors(obj: Record<string, unknown> | undefined): string[] {
   const colors = new Set<string>()
   if (obj) collectColors(obj, colors)
-  return [...colors].slice(0, 8)
+  return [...colors]
 }

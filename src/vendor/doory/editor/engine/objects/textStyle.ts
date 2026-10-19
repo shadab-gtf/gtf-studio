@@ -33,7 +33,7 @@ export interface TextPatch {
 
 /**
  * Drops what cannot be applied (NaN, Infinity, an unknown weight) and limits the numbers to the engine's range, so a
- * text patch from any caller is safe: the toolbar's tighter limits (size 8-200, line height 0.5-3) are the UI's own rules.
+ * text patch from any caller is safe: the toolbar's tighter minimum size and line height limits are the UI's own rules.
  */
 export function sanitizeTextPatch(patch: TextPatch): TextPatch {
   const out: TextPatch = { ...patch }

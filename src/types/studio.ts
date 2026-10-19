@@ -54,7 +54,21 @@ export interface Template {
     | "Resume"
     | "Invitation"
     | "Flyer"
-    | "Business card";
+    | "Business card"
+    | "Portrait post"
+    | "Video thumbnail"
+    | "Landscape video"
+    | "Document"
+    | "Letter"
+    | "Book cover"
+    | "Whiteboard"
+    | "Brainstorm"
+    | "Profile picture"
+    | "Brochure"
+    | "Invoice";
+  collection?: "reference";
+  formatId?: string;
+  sizeLabel?: string;
   description: string;
   document: CreativeDocument;
 }
@@ -66,6 +80,7 @@ export interface Format {
   height: number;
   kind: Project["kind"];
   color: string;
+  printDpi?: number;
 }
 export interface StudioCatalog {
   templates: Template[];

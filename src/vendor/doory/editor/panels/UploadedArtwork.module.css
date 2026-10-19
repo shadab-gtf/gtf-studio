@@ -1,0 +1,8 @@
+.section { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-4); min-width: 0; }
+.hint { margin: 0; color: var(--color-text-muted); font: 400 var(--text-xs) / 1.5 var(--font-sans); }
+.library summary { padding-block: 6px; cursor: pointer; font: 600 var(--text-xs) / 1.5 var(--font-sans); }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; max-height: 192px; overflow-y: auto; padding: 3px; }
+.tile { display: grid; place-items: center; aspect-ratio: 1; min-width: 0; padding: 8px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); cursor: pointer; }
+.tile img { width: 100%; height: 100%; object-fit: contain; }
+.tile:hover, .tile[aria-pressed='true'] { border-color: var(--color-brand); }
+.tile:focus-visible, .library summary:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 1px; }

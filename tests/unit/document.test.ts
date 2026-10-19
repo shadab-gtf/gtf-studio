@@ -15,7 +15,20 @@ describe("document contracts", () => {
       expect(() => parseDocument(template.document)).not.toThrow();
       counts.set(template.category, (counts.get(template.category) ?? 0) + 1);
     }
-    expect(counts.size).toBe(10);
+    expect([...counts.keys()].sort()).toEqual([
+      "Banner",
+      "Business card",
+      "Flyer",
+      "Invitation",
+      "Logo",
+      "Portrait post",
+      "Poster",
+      "Presentation",
+      "Resume",
+      "Social",
+      "Story",
+      "Video thumbnail",
+    ]);
     for (const count of counts.values())
       expect(count).toBeGreaterThanOrEqual(5);
     expect(

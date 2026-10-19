@@ -58,6 +58,8 @@ export interface DocPage {
 
 export interface DocMeta {
   presetId?: string
+  /** Raster density of a print-size canvas. Omitted documents retain CSS pixels at 96 dpi. */
+  printDpi?: number
   bleedPx?: number
   brandKitId?: string
 }

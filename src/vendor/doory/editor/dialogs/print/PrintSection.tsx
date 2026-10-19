@@ -18,19 +18,21 @@ interface PrintSectionProps {
   unit: DocUnit
   /** Made by the print server (vector) or by the browser (300 dpi pictures); said honestly under the options. */
   server: boolean
+  dpi?: number
 }
 
 const PRESETS: readonly PrintPresetId[] = ['screen', 'standard', 'custom']
 
 /** Bleed, crop marks and a schematic of the result: the "Print" part of the Download dialog for PDF files. */
-export function PrintSection({ settings, onChange, sizes, unit, server }: PrintSectionProps) {
+export function PrintSection({ settings, onChange, sizes, unit, server, dpi = 96 }: PrintSectionProps) {
   const inUnit = bleedInUnit(settings.bleedMm, unit)
   const bleedOn = settings.bleedMm > 0
   const bleedLabel = `${settings.bleedMm} mm`
   const grows = bleedOn || settings.cropMarks
-  const sheet = sizes.length > 0 ? printGeometry(sizes[0], settings.bleedMm, settings.cropMarks) : null
+  const sheet = sizes.length > 0 ? printGeometry(sizes[0], settings.bleedMm, settings.cropMarks, dpi) : null
   const extras = bleedOn && settings.cropMarks ? t.print.extras.both : bleedOn ? t.print.extras.bleed : t.print.extras.marks
-  const sheetText = !grows || !sheet ? null : sizes.every((size) => sameSize(size, sizes[0])) ? t.print.sheet(formatUnit(sheet.sheetWidth, unit), formatUnit(sheet.sheetHeight, unit), unit, extras) : t.print.sheetMixed(extras)
+  const displaySize = (px: number) => formatUnit(unit === 'px' ? px : px * 96 / dpi, unit)
+  const sheetText = !grows || !sheet ? null : sizes.every((size) => sameSize(size, sizes[0])) ? t.print.sheet(displaySize(sheet.sheetWidth), displaySize(sheet.sheetHeight), unit, extras) : t.print.sheetMixed(extras)
   return (
     <fieldset className={styles.section} data-testid="print-section">
       <legend>{t.print.section}</legend>

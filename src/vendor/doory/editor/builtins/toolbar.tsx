@@ -1,6 +1,6 @@
 import { registerToolbarSection } from '../toolbar/registry'
 import { ActionsSection, AlignSection, FlipRotateSection, GroupSection, MultiSection, ZOrderSection } from '../toolbar/sections/common'
-import { elementColors, onlyKind } from '../toolbar/kinds'
+import { onlyKind } from '../toolbar/kinds'
 import { CropSection } from '../toolbar/sections/crop'
 import { ImageSection } from '../toolbar/sections/image'
 import { PageSection } from '../toolbar/sections/page'
@@ -21,7 +21,7 @@ export function registerBuiltinToolbarSections(): void {
   registerToolbarSection({ id: 'shape', order: 10, appliesTo: (sel) => onlyKind(sel.kinds, 'shape') && sel.ids.length === 1, component: ShapeSection })
   registerToolbarSection({ id: 'line', order: 10, appliesTo: (sel) => onlyKind(sel.kinds, 'line') && sel.ids.length === 1, component: LineSection })
   registerToolbarSection({ id: 'image', order: 10, appliesTo: (sel) => onlyKind(sel.kinds, 'image') && sel.ids.length === 1, component: ImageSection })
-  registerToolbarSection({ id: 'element', order: 10, appliesTo: (sel) => onlyKind(sel.kinds, 'element') && sel.ids.length === 1 && elementColors(sel.objects[0]).length > 0, component: ElementSection })
+  registerToolbarSection({ id: 'element', order: 10, appliesTo: (sel) => onlyKind(sel.kinds, 'element') && sel.ids.length === 1, component: ElementSection })
   registerToolbarSection({ id: 'qr', order: 10, appliesTo: (sel) => onlyKind(sel.kinds, 'qr'), component: QrSection })
   registerToolbarSection({ id: 'placeholder', order: 10, appliesTo: (sel) => onlyKind(sel.kinds, 'placeholder') && sel.ids.length === 1, component: PlaceholderSection })
   registerToolbarSection({ id: 'group', order: 10, appliesTo: (sel) => onlyKind(sel.kinds, 'group') && sel.ids.length === 1, component: GroupSection })

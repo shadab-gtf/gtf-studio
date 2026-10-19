@@ -10,6 +10,7 @@ import ed from '../chrome/ed.module.css'
 import { CHART_KINDS, type ChartKind, chartSvg } from './charts'
 import { pageCentre } from './insertAt'
 import styles from './Drawers.module.css'
+import { UploadedArtwork } from '../panels/UploadedArtwork'
 
 interface ShapeCard {
   id: string
@@ -97,6 +98,7 @@ export function ShapesDrawer({ close }: PanelProps) {
 
   return (
     <>
+      <UploadedArtwork mode="shape" />
       {group(t.drawers.basicShapes, basic)}
       {group(t.drawers.decorative, decorative)}
       {group(t.drawers.moreBasics, moreBasics)}

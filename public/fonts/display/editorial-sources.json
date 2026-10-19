@@ -1,0 +1,202 @@
+[
+  {
+    "id": "anton",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/anton-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/anton@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "bebas-neue",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/bebas-neue-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/bebas-neue@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "six-caps",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/six-caps-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/six-caps@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "league-gothic",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/league-gothic-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/league-gothic@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "league-spartan",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/league-spartan-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/league-spartan@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "league-spartan",
+    "weight": 700,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/league-spartan-700.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/league-spartan@latest/latin-700-normal.woff2"
+  },
+  {
+    "id": "league-spartan",
+    "weight": 800,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/league-spartan-800.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/league-spartan@latest/latin-800-normal.woff2"
+  },
+  {
+    "id": "italiana",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/italiana-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/italiana@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "bodoni-moda",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/bodoni-moda-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/bodoni-moda@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "bodoni-moda",
+    "weight": 700,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/bodoni-moda-700.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/bodoni-moda@latest/latin-700-normal.woff2"
+  },
+  {
+    "id": "cormorant-garamond",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/cormorant-garamond-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/cormorant-garamond@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "cormorant-garamond",
+    "weight": 600,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/cormorant-garamond-600.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/cormorant-garamond@latest/latin-600-normal.woff2"
+  },
+  {
+    "id": "cormorant-garamond",
+    "weight": 400,
+    "style": "italic",
+    "subset": "latin",
+    "url": "/fonts/display/cormorant-garamond-400-italic.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/cormorant-garamond@latest/latin-400-italic.woff2"
+  },
+  {
+    "id": "dm-serif-display",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/dm-serif-display-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/dm-serif-display@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "montserrat",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/montserrat-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/montserrat@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "montserrat",
+    "weight": 700,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/montserrat-700.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/montserrat@latest/latin-700-normal.woff2"
+  },
+  {
+    "id": "montserrat",
+    "weight": 800,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/montserrat-800.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/montserrat@latest/latin-800-normal.woff2"
+  },
+  {
+    "id": "great-vibes",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/great-vibes-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/great-vibes@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "allura",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/allura-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/allura@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "caveat",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/caveat-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/caveat@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "playfair-display",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/playfair-display-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/playfair-display@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "playfair-display",
+    "weight": 700,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/playfair-display-700.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/playfair-display@latest/latin-700-normal.woff2"
+  },
+  {
+    "id": "archivo-black",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/archivo-black-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/archivo-black@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "space-grotesk",
+    "weight": 400,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/space-grotesk-400.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/space-grotesk@latest/latin-400-normal.woff2"
+  },
+  {
+    "id": "space-grotesk",
+    "weight": 700,
+    "style": "normal",
+    "subset": "latin",
+    "url": "/fonts/display/space-grotesk-700.woff2",
+    "source": "https://cdn.jsdelivr.net/fontsource/fonts/space-grotesk@latest/latin-700-normal.woff2"
+  }
+]

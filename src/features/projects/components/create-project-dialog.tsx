@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { createDocument } from "@/core/document/schema";
+import { toStudioDocument } from "@/features/studio/document-bridge";
 import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
 import { useCreateProject } from "@/features/projects/hooks/use-projects";
@@ -25,15 +26,21 @@ function CreateForm({
     <form
       onSubmit={(event) => {
         event.preventDefault();
+        const document = createDocument(
+          selected?.width ?? width,
+          selected?.height ?? height,
+        );
+        if (selected?.printDpi)
+          document.studio = {
+            ...toStudioDocument(document),
+            meta: { presetId: selected.id, printDpi: selected.printDpi },
+          };
         create.mutate({
           title:
             title.trim() ||
             `Untitled ${selected?.title.toLowerCase() ?? "design"}`,
           kind: selected?.kind ?? "design",
-          document: createDocument(
-            selected?.width ?? width,
-            selected?.height ?? height,
-          ),
+          document,
         });
       }}
     >

@@ -10,8 +10,10 @@ export function Brand({ compact = false, href = "/" }: { compact?: boolean; href
         fill="none"
         aria-hidden="true"
       >
-        <path d="M3 3h14v14H3zM19 19h14v14H19z" fill="#29afe4" />
-        <path d="M19 3h14v14H19zM3 19h14v14H3z" fill="#e24397" />
+        <path d="M3 3h14v14H3z" fill="#F0A1CB" />
+        <path d="M19 3h14v14H19z" fill="#94D6F1" />
+        <path d="M3 19h14v14H3z" fill="#FEF49E" />
+        <path d="M19 19h14v14H19z" fill="#F0A1CB" />
       </svg>
       {!compact && (
         <span>

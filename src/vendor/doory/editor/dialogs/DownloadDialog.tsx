@@ -13,6 +13,7 @@ import { Slider } from '../ui/Slider'
 import { Switch } from '../ui/Switch'
 import { ExportProblem } from './print/ExportProblem'
 import { PrintSection } from './print/PrintSection'
+import { documentPrintDpi } from '../engine/export/printGeometry'
 import type { VideoFormat } from '../engine/export/video/options'
 import { LazyVideoSection } from './VideoSectionLoader'
 import { type ExportFailure, describeExportFailure, isCancellation } from './print/exportFailure'
@@ -216,7 +217,7 @@ export function DownloadDialog({ props }: { props?: Record<string, unknown> } = 
           ) : null}
         </div>
 
-        {printing ? <PrintSection settings={print} onChange={changePrint} sizes={chosen} unit={doc.unit} server={format?.server === true} /> : null}
+        {printing ? <PrintSection settings={print} onChange={changePrint} sizes={chosen} unit={doc.unit} server={format?.server === true} dpi={documentPrintDpi(doc)} /> : null}
 
         {video && format ? <LazyVideoSection format={format.id as VideoFormat} pages={chosenPages} rangeInvalid={rangeInvalid} footer={footerSlot} onLockChange={setVideoLocked} /> : null}
 

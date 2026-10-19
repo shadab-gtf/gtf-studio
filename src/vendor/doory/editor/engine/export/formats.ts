@@ -3,7 +3,7 @@ import { fontsInObjects, pageSize } from '../docOps'
 import { canvasToBlob, renderPageToCanvas, renderPageToSvg } from '../render'
 import { mmToPx } from '../units'
 import { documentLanguage } from './language'
-import { MARK_STROKE_PX, type PrintGeometry, cropMarkSegments, printGeometry } from './printGeometry'
+import { MARK_STROKE_PX, MARK_GAP_MM, MARK_LENGTH_MM, documentPrintDpi, type PrintGeometry, cropMarkSegments, printGeometry } from './printGeometry'
 import {
   type ExportContext,
   type ExportFile,
@@ -89,10 +89,11 @@ async function embedFontFaces(svg: string, objects: ExportContext['pages'][numbe
  */
 async function pdfFile(ctx: ExportContext): Promise<ExportFile[]> {
   const { jsPDF } = await import('jspdf')
-  const mm = (px: number): number => (px / PX_PER_INCH) * MM_PER_INCH
+  const dpi = documentPrintDpi(ctx.document)
+  const mm = (px: number): number => (px / dpi) * MM_PER_INCH
   const orientation = (w: number, h: number): 'p' | 'l' => (w > h ? 'l' : 'p')
   const { bleedMm, cropMarks } = ctx.options
-  const geometries = ctx.pages.map(({ page }) => printGeometry(pageSize(ctx.document, page), bleedMm, cropMarks))
+  const geometries = ctx.pages.map(({ page }) => printGeometry(pageSize(ctx.document, page), bleedMm, cropMarks, dpi))
   const first = geometries[0]
   const pdf = new jsPDF({ unit: 'mm', format: [mm(first.sheetWidth), mm(first.sheetHeight)], orientation: orientation(first.sheetWidth, first.sheetHeight), compress: true })
   pdf.setProperties({ title: ctx.title, creator: 'GTF Studio' })
@@ -104,9 +105,9 @@ async function pdfFile(ctx: ExportContext): Promise<ExportFile[]> {
     const size = pageSize(ctx.document, page)
     const g = geometries[i]
     if (i > 0) pdf.addPage([mm(g.sheetWidth), mm(g.sheetHeight)], orientation(g.sheetWidth, g.sheetHeight))
-    const canvas = await renderPageToCanvas(page, size, ctx.engine.loadContext, { multiplier: PDF_DPI / PX_PER_INCH, bleed: g.bleed })
+    const canvas = await renderPageToCanvas(page, size, ctx.engine.loadContext, { multiplier: PDF_DPI / dpi, bleed: g.bleed })
     pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', mm(g.slug), mm(g.slug), mm(g.artWidth), mm(g.artHeight), undefined, 'FAST')
-    drawCropMarks(pdf, g, mm)
+    drawCropMarks(pdf, g, mm, dpi)
     ctx.onProgress((i + 1) / total, 'rendering')
   }
   const blob = pdf.output('blob')
@@ -114,11 +115,11 @@ async function pdfFile(ctx: ExportContext): Promise<ExportFile[]> {
 }
 
 /** Black hairlines in the slug, the same eight the print server draws. */
-function drawCropMarks(pdf: import('jspdf').jsPDF, g: PrintGeometry, mm: (px: number) => number): void {
-  const marks = cropMarkSegments(g)
+function drawCropMarks(pdf: import('jspdf').jsPDF, g: PrintGeometry, mm: (px: number) => number, dpi: number): void {
+  const marks = cropMarkSegments(g, mmToPx(MARK_GAP_MM) * dpi / PX_PER_INCH, mmToPx(MARK_LENGTH_MM) * dpi / PX_PER_INCH)
   if (marks.length === 0) return
   pdf.setDrawColor(0, 0, 0)
-  pdf.setLineWidth(mm(MARK_STROKE_PX))
+  pdf.setLineWidth(mm(MARK_STROKE_PX * dpi / PX_PER_INCH))
   for (const [x1, y1, x2, y2] of marks) pdf.line(mm(x1), mm(y1), mm(x2), mm(y2))
 }
 

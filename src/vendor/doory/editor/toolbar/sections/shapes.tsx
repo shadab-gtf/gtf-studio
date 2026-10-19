@@ -199,12 +199,14 @@ export function ElementSection() {
   const o = sel.objects[0] ?? {}
   const map = (o.colorMap ?? {}) as Record<string, string>
   const list = elementColors(o)
-  if (list.length === 0) return null
+  const swatch = (c: string) => <ColorButton key={c} label={t.tools.recolorOf(c)} value={{ type: 'solid', color: map[c] ?? c }} solidOnly extraSwatches={{ label: t.tools.originalColors, colors: list }} onChange={(f) => (f.type === 'solid' ? editor.style.recolor(c, f.color) : undefined)} />
+  const background = typeof o.backgroundColor === 'string' && o.backgroundColor ? o.backgroundColor : 'transparent'
   return (
     <div className={styles.row} role="group" aria-label={t.toolbar.recolor} data-testid="ed-recolor">
-      {list.map((c) => (
-        <ColorButton key={c} label={t.tools.recolorOf(c)} value={{ type: 'solid', color: map[c] ?? c }} solidOnly extraSwatches={{ label: t.tools.originalColors, colors: list }} onChange={(f) => (f.type === 'solid' ? editor.style.recolor(c, f.color) : undefined)} />
-      ))}
+      {list.slice(0, 6).map(swatch)}
+      {list.length > 6 ? <PopoverTool label="More SVG colors" trigger={<span>+{list.length - 6}</span>} width={288}><div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>{list.slice(6).map(swatch)}</div></PopoverTool> : null}
+      <ColorButton label="SVG background" value={{ type: 'solid', color: background }} none={background === 'transparent'} solidOnly onChange={fill => { if (fill.type === 'solid') editor.style.setElementBackground(fill.color) }} />
+      {background !== 'transparent' ? <button type="button" className={`${ed.btn} ${ed.ghost}`} onClick={() => editor.style.setElementBackground('transparent')}>Clear background</button> : null}
       {Object.keys(map).length > 0 ? (
         <button type="button" className={`${ed.btn} ${ed.ghost}`} onClick={() => editor.style.resetColors()}>
           {t.toolbar.reset}

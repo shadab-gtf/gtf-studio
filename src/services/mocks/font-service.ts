@@ -1,6 +1,7 @@
 import { openDB, type DBSchema } from "idb";
 import { z } from "zod";
 import { FONT_DATABASE } from "../repositories/storage-cleanup";
+import { bundledFontSource } from "./bundled-fonts";
 import {
   fontSchema,
   type FontChoice,
@@ -128,14 +129,14 @@ export function createFontService(): FontService {
                 !font.subsets.includes(choice.subset)
               )
                 throw new Error("This font style is unavailable.");
-              const source =
+              const source = bundledFontSource(choice) ?? (
                 font.provider === "fontlibrary"
                   ? font.files?.find(
                       (file) =>
                         file.weight === choice.weight &&
                         file.style === choice.style,
                     )?.url
-                  : `https://cdn.jsdelivr.net/fontsource/fonts/${font.id}@latest/${choice.subset}-${choice.weight}-${choice.style}.woff2`;
+                  : `https://cdn.jsdelivr.net/fontsource/fonts/${font.id}@latest/${choice.subset}-${choice.weight}-${choice.style}.woff2`);
               if (!source)
                 throw new Error(
                   "This combination of weight and style is unavailable. Choose another weight.",

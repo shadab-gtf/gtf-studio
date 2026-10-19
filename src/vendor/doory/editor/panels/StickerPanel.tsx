@@ -10,6 +10,7 @@ import ed from '../chrome/ed.module.css'
 import { useSentinel } from '../hooks/useSentinel'
 import { type CategoryEntry, CategoryMenu, LibrarySearch } from './library'
 import styles from './Sticker.module.css'
+import { UploadedArtwork } from './UploadedArtwork'
 
 type Filter = { type: 'all' } | { type: 'kind'; kind: ElementKind } | { type: 'pack'; pack: ElementPack }
 
@@ -62,6 +63,7 @@ export function StickerPanel() {
   const loading = list.loading && list.items.length === 0
   return (
     <>
+      <UploadedArtwork mode="sticker" />
       <LibrarySearch value={query} onChange={setQuery} placeholder={t.stickers.search} clearLabel={t.stickers.clearSearch} testId="sticker-search" />
       <CategoryMenu name={t.stickers.category} label={label} entries={filters.entries} activeId={filterKey(filter)} onSelect={(id) => setFilter(filters.byId.get(id) ?? { type: 'all' })} testId="sticker-category" />
 

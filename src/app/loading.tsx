@@ -1,4 +1,4 @@
-import { WorkspaceSkeleton } from "@/components/feedback/skeletons";
+import { LandingSkeleton } from "@/components/feedback/landing-skeleton";
 export default function Loading() {
-  return <WorkspaceSkeleton />;
+  return <LandingSkeleton />;
 }

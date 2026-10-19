@@ -52,6 +52,7 @@ import { cloneObjects } from '../docOps'
 import { pickFiles } from '../files'
 import { t } from '../../strings'
 import { reidTree } from './arrange'
+import { SvgUploadError, validateSvgMarkup } from '@/features/assets/svg-upload'
 
 export type ShapeKind = 'rect' | 'rounded' | 'ellipse' | 'triangle' | 'polygon' | 'star' | 'diamond' | 'line' | 'arrow' | 'divider' | 'frame'
 
@@ -298,18 +299,28 @@ export class InsertApi {
 
   async imageFromAsset(ref: AssetRef, at?: { x: number; y: number }, pageId?: string): Promise<void> {
     const target = pageId ?? this.engine.state.activePageId
+    const placement = at ?? this.center()
     try {
       const url = await this.engine.assets.resolve(ref.url)
-      const img = await createImage({ src: ref.url, url, assetId: ref.id }, at ?? this.center(), this.fitFor(target))
+      if (ref.kind === 'svg') {
+        const response = await fetch(url)
+        if (!response.ok) throw new Error('The SVG could not be loaded.')
+        const markup = validateSvgMarkup(await response.text())
+        const vector = await createElementFromSvg(markup, placement, stickerSize(this.engine.pageSizeOf(target)), { elementId: `upload:${ref.id}`, name: ref.name })
+        await this.add([vector], `Add ${ref.name}`, { pageId: target })
+        return
+      }
+      const img = await createImage({ src: ref.url, url, assetId: ref.id }, placement, this.fitFor(target))
       asDory(img).name = ref.name
       await this.add([img], t.history.addImage, { pageId: target })
-    } catch {
-      this.engine.toast(t.errors.imageLoad, 'error')
+    } catch (error) {
+      this.engine.toast(error instanceof SvgUploadError ? error.message : t.errors.imageLoad, 'error')
     }
   }
 
   /** Uploads files through the adapter and adds each as an image (file picker, drag-drop, paste). */
   async imageFiles(files: readonly File[], at?: { x: number; y: number }, pageId?: string): Promise<AssetRef[]> {
+    const target = pageId ?? this.engine.state.activePageId
     const added: AssetRef[] = []
     if (files.length === 0 || this.engine.readOnly) return added
     const store = this.engine.store
@@ -319,7 +330,7 @@ export class InsertApi {
         const ref = await this.engine.assets.upload(file, file instanceof File ? file.name : undefined)
         added.push(ref)
         store.setState((s) => ({ uploads: [ref, ...s.uploads.filter((u) => u.id !== ref.id)] }))
-        await this.imageFromAsset(ref, at, pageId)
+        await this.imageFromAsset(ref, at, target)
       } catch (err) {
         this.engine.toast(err instanceof UploadError ? err.message : t.errors.upload, 'error')
       } finally {
@@ -330,9 +341,35 @@ export class InsertApi {
   }
 
   /** Opens the system file picker and inserts the chosen images. */
-  async pickAndInsertImages(): Promise<void> {
-    const files = await pickFiles('image/png,image/jpeg,image/webp,image/gif,image/avif,image/svg+xml', true)
-    await this.imageFiles(files)
+  async pickAndInsertImages(svgOnly = false): Promise<void> {
+    const pageId = this.engine.state.activePageId
+    const files = await pickFiles(svgOnly ? 'image/svg+xml,.svg' : 'image/png,image/jpeg,image/webp,image/gif,image/avif,image/svg+xml,.svg', true)
+    if (svgOnly && files.some(file => file.type !== 'image/svg+xml' && !/\.svg$/i.test(file.name))) {
+      this.engine.toast('Choose an SVG file for an editable shape.', 'error')
+      return
+    }
+    await this.imageFiles(files, undefined, pageId)
+  }
+
+  /** Upload and apply to the page that opened the picker, without adding an image object. */
+  async pickAndSetBackground(): Promise<void> {
+    const pageId = this.engine.state.activePageId
+    const [file] = await pickFiles('image/png,image/jpeg,image/webp,image/gif,image/avif,image/svg+xml,.svg', false)
+    if (!file || this.engine.readOnly) return
+    const store = this.engine.store
+    store.setState(s => ({ uploading: s.uploading + 1 }))
+    try {
+      const ref = await this.engine.assets.upload(file, file.name)
+      store.setState(s => ({ uploads: [ref, ...s.uploads.filter(u => u.id !== ref.id)] }))
+      if (this.engine.state.doc.pages.some(page => page.id === pageId)) {
+        this.engine.pages.setBackground(pageId, { type: 'image', src: ref.url, fit: 'cover' })
+        this.engine.announce('Background image added')
+      }
+    } catch (error) {
+      this.engine.toast(error instanceof UploadError ? error.message : t.errors.upload, 'error')
+    } finally {
+      store.setState(s => ({ uploading: Math.max(0, s.uploading - 1) }))
+    }
   }
 
   /** Uploads without inserting (Uploads panel "Upload" button). */

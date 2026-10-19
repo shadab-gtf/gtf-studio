@@ -1,5 +1,7 @@
 # Validation
 
+Development writes to `.next-dev/`; production builds use `.next/`. This keeps a parallel build from removing the running development server's files. Restart the development server after changing dependencies or switching package managers so it does not retain modules from the old installation.
+
 Unit tests exercise schema rejection, template coverage, unique IDs, command history, SVG escaping, persisted transactions, revision conflicts, project lifecycle, pagination/cancellation, HTTP validation/errors, and font-catalog uniqueness/license metadata.
 
 Playwright tests run against the production build. They create a blank design, edit text, await autosave, reload, undo, browse templates, create and present a ten-slide deck, draw a stroke, reopen offline, load/upload fonts, use context actions, and download actual export files. Desktop and mobile viewport workflows run in Chromium. The live font test intentionally contacts the provider; it can detect provider outages and should not be interpreted as an application-only regression.

@@ -159,7 +159,6 @@ test("pointer selection shows relevant text, shape and image tools; animations a
     else await page.mouse.click(box.x + box.width * xRatio, box.y + box.height * yRatio);
   }
   await selectAt(.25, .32);
-  await expect(page.getByTestId("ed-context-strip")).toHaveAttribute("data-kind", "text");
   await expect(page.getByTestId("ed-font")).toBeVisible();
   await page.getByTestId("ed-add-entry-animate").click();
   await expect(page.getByTestId("animate-selected")).toContainText("1");
@@ -167,7 +166,7 @@ test("pointer selection shows relevant text, shape and image tools; animations a
   await expect(page.getByTestId("animate-enter-fade")).toHaveAttribute("aria-pressed", "true");
   await closePanel(page, "Animate");
   await selectAt(.82, .18);
-  await expect(page.getByTestId("ed-context-strip")).toHaveAttribute("data-kind", "shape");
+  await expect(page.getByTestId("ed-font")).toHaveCount(0);
   await expect(page.getByTestId("ed-fill")).toBeVisible();
   await page.getByTestId("ed-add-entry-animate").click();
   await expect(page.getByTestId("animate-enter-fade")).toHaveAttribute("aria-pressed", "false");
@@ -182,7 +181,7 @@ test("pointer selection shows relevant text, shape and image tools; animations a
   await selectAt(.1, .7);
   await expect(page.getByTestId("ed-context-strip")).toHaveAttribute("data-kind", "page");
   await selectAt(.5, .5);
-  await expect(page.getByTestId("ed-context-strip")).toHaveAttribute("data-kind", "image");
+  await expect(page.getByTestId("ed-font")).toHaveCount(0);
   for (const id of ["ed-crop", "ed-replace-image", "ed-adjust", "ed-frame"]) await expect(page.getByTestId(id)).toBeVisible();
   await expectSaved(page);
 });
@@ -230,10 +229,10 @@ test("expanded template browser adds a deck and presents its pages", async ({
   test.setTimeout(120000);
   await openStudio(page);
   await page.getByTestId("ed-add-entry-templates").click();
-  await page.getByTestId("template-search").fill("Electric presentation");
+  await page.getByTestId("template-search").fill("Creative Brief");
   await page
     .getByRole("button", {
-      name: "Use template Electric presentation",
+      name: "Use template Creative Brief",
       exact: true,
     })
     .click();

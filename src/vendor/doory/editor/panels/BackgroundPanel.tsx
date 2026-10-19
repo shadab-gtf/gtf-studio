@@ -1,8 +1,7 @@
-import { PreviewImage } from '@/vendor/doory/editor/ui/PreviewImage'
-import { Check, ImagePlus } from '@/features/studio/icons'
-import { useMemo, useState } from 'react'
+import { Check } from '@/features/studio/icons'
+import { useMemo, useRef, useState } from 'react'
 import type { PageBackground } from '@/vendor/doory/types/document'
-import { useDocument, useEditor, useEditorState, useEditorStateShallow } from '../context'
+import { useDocument, useEditor, useEditorState } from '../context'
 import { documentColors } from '../engine/docOps'
 import { gradientCss } from '../engine/objects/fills'
 import { t } from '../strings'
@@ -10,26 +9,20 @@ import { Button } from '../ui/Button'
 import { ColorButton } from '../ui/ColorButton'
 import { Segmented } from '../ui/Segmented'
 import { GRADIENT_PRESETS, palettes } from '../ui/swatches'
-import { useResolvedSrc } from '../hooks/useResolvedSrc'
+import { FillEditor } from '../ui/FillEditor'
+import { Popover } from '../ui/Popover'
+import { UploadedArtwork } from './UploadedArtwork'
 import ed from '../chrome/ed.module.css'
 import { backgroundFill, fillToBackground } from './backgroundFill'
 import { PATTERN_IDS, type PatternId, patternUrl, tileSize } from './patterns'
 import styles from './Panel.module.css'
 
-function UploadSwatch({ src, active, onPick }: { src: string; active: boolean; onPick: () => void }) {
-  const url = useResolvedSrc(src)
-  return (
-    <button type="button" className={`${styles.tile} ${active ? styles.chipOn : ''}`} onClick={onPick} aria-label={t.backgroundPanel.useImage} aria-pressed={active}>
-      {url ? <PreviewImage src={url} alt="" draggable={false} /> : null}
-    </button>
-  )
-}
-
 export function BackgroundPanel() {
   const editor = useEditor()
   const doc = useDocument()
   const activeId = useEditorState((s) => s.activePageId)
-  const uploads = useEditorStateShallow((s) => s.uploads)
+  const gradientAnchor = useRef<HTMLButtonElement>(null)
+  const [gradientOpen, setGradientOpen] = useState(false)
   const page = doc.pages.find((p) => p.id === activeId) ?? doc.pages[0]
   const bg = page.background
   const docColors = useMemo(() => documentColors(doc, 12), [doc])
@@ -48,8 +41,8 @@ export function BackgroundPanel() {
       <section className={styles.section}>
         <p className={ed.sectionTitle}>{t.panels.pageBackground}</p>
         <div className={styles.fieldRow}>
-          <span className={styles.hint}>{t.backgroundPanel.custom}</span>
-          <ColorButton label={t.panels.pageBackground} value={backgroundFill(bg)} onChange={(f) => set(fillToBackground(f), 'bg-fill')} />
+          <span className={styles.hint}>Background color</span>
+          <ColorButton label="Background color" value={bg.type === 'solid' ? backgroundFill(bg) : { type: 'solid', color: '#ffffff' }} solidOnly onChange={(f) => set(fillToBackground(f), 'bg-fill')} />
         </div>
         <div className={styles.swatchGrid} role="group" aria-label={t.panels.swatches}>
           {colors.map((c) => (
@@ -60,6 +53,14 @@ export function BackgroundPanel() {
 
       <section className={styles.section}>
         <p className={ed.sectionTitle}>{t.panels.gradient}</p>
+        <Button ref={gradientAnchor} variant="soft" aria-haspopup="dialog" aria-expanded={gradientOpen} onClick={() => {
+          if (bg.type !== 'gradient') set({ type: 'gradient', kind: 'linear', angle: 90, stops: [{ offset: 0, color: bg.type === 'solid' ? bg.color : '#ffffff' }, { offset: 1, color: '#e24397' }] })
+          setGradientOpen(true)
+        }}>Create custom gradient</Button>
+        <Popover open={gradientOpen} onClose={() => setGradientOpen(false)} anchorRef={gradientAnchor} label="Custom background gradient" placement="bottom-start">
+          <FillEditor value={backgroundFill(bg)} onChange={fill => set(fillToBackground(fill), `bg-gradient:${page.id}`)} />
+        </Popover>
+        <p className={styles.hint}>Mix your own colors, add stops, and choose a linear or radial gradient.</p>
         <div className={`${styles.grid} ${styles.grid}`}>
           {GRADIENT_PRESETS.map((g) => (
             <button
@@ -94,16 +95,7 @@ export function BackgroundPanel() {
 
       <section className={styles.section}>
         <p className={ed.sectionTitle}>{t.panels.image}</p>
-        <Button icon={<ImagePlus size={18} />} onClick={() => void editor.insert.pickAndUpload()}>
-          {t.panels.uploadImage}
-        </Button>
-        {uploads.length > 0 ? (
-          <div className={`${styles.grid} ${styles.grid2}`}>
-            {uploads.map((u) => (
-              <UploadSwatch key={u.id} src={u.thumbUrl || u.url} active={bg.type === 'image' && bg.src === u.url} onPick={() => set({ type: 'image', src: u.url, fit: bg.type === 'image' ? bg.fit : 'cover' })} />
-            ))}
-          </div>
-        ) : null}
+        <UploadedArtwork mode="background" selectedSrc={bg.type === 'image' ? bg.src : undefined} onPick={asset => set({ type: 'image', src: asset.url, fit: bg.type === 'image' ? bg.fit : 'cover' })} />
         {bg.type === 'image' ? (
           <>
             <Segmented

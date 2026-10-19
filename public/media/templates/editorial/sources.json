@@ -1,0 +1,302 @@
+[
+  {
+    "id": "fashion-red",
+    "file": "/media/templates/editorial/fashion-red.webp",
+    "width": 1800,
+    "height": 1200,
+    "source": "https://images.pexels.com/photos/994517/pexels-photo-994517.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/994517/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "fashion-cream",
+    "file": "/media/templates/editorial/fashion-cream.webp",
+    "width": 1601,
+    "height": 2400,
+    "source": "https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/5886041/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "fashion-yellow",
+    "file": "/media/templates/editorial/fashion-yellow.webp",
+    "width": 1800,
+    "height": 1200,
+    "source": "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/1536619/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "fashion-street",
+    "file": "/media/templates/editorial/fashion-street.webp",
+    "width": 1800,
+    "height": 1202,
+    "source": "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/1036623/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "fashion-coat",
+    "file": "/media/templates/editorial/fashion-coat.webp",
+    "width": 1600,
+    "height": 2400,
+    "source": "https://images.pexels.com/photos/7691223/pexels-photo-7691223.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/7691223/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "portrait-woman",
+    "file": "/media/templates/editorial/portrait-woman.webp",
+    "width": 1800,
+    "height": 1234,
+    "source": "https://images.pexels.com/photos/3764011/pexels-photo-3764011.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/3764011/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "portrait-man",
+    "file": "/media/templates/editorial/portrait-man.webp",
+    "width": 1800,
+    "height": 2250,
+    "source": "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/2379005/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "menswear",
+    "file": "/media/templates/editorial/menswear.webp",
+    "width": 1687,
+    "height": 2400,
+    "source": "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/1043474/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "sunglasses",
+    "file": "/media/templates/editorial/sunglasses.webp",
+    "width": 1600,
+    "height": 2400,
+    "source": "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/1926769/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "house",
+    "file": "/media/templates/editorial/house.webp",
+    "width": 1800,
+    "height": 1200,
+    "source": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/106399/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "villa",
+    "file": "/media/templates/editorial/villa.webp",
+    "width": 1800,
+    "height": 1200,
+    "source": "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/1396122/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "architecture",
+    "file": "/media/templates/editorial/architecture.webp",
+    "width": 1800,
+    "height": 1160,
+    "source": "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/323780/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "living-room",
+    "file": "/media/templates/editorial/living-room.webp",
+    "width": 1800,
+    "height": 1157,
+    "source": "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/1571460/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "interior",
+    "file": "/media/templates/editorial/interior.webp",
+    "width": 1800,
+    "height": 1185,
+    "source": "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/1643383/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "bedroom",
+    "file": "/media/templates/editorial/bedroom.webp",
+    "width": 1800,
+    "height": 1201,
+    "source": "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/271624/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "chair",
+    "file": "/media/templates/editorial/chair.webp",
+    "width": 1800,
+    "height": 1013,
+    "source": "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/276724/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "perfume",
+    "file": "/media/templates/editorial/perfume.webp",
+    "width": 1800,
+    "height": 1200,
+    "source": "https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/965989/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "concert",
+    "file": "/media/templates/editorial/concert.webp",
+    "width": 1800,
+    "height": 1200,
+    "source": "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/1190297/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "forest",
+    "file": "/media/templates/editorial/forest.webp",
+    "width": 1800,
+    "height": 1200,
+    "source": "https://images.pexels.com/photos/167698/pexels-photo-167698.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/167698/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "mountains",
+    "file": "/media/templates/editorial/mountains.webp",
+    "width": 1600,
+    "height": 2400,
+    "source": "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/1366919/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "road",
+    "file": "/media/templates/editorial/road.webp",
+    "width": 1800,
+    "height": 1163,
+    "source": "https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/443446/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "restaurant",
+    "file": "/media/templates/editorial/restaurant.webp",
+    "width": 1800,
+    "height": 1200,
+    "source": "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/262978/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "cocktail",
+    "file": "/media/templates/editorial/cocktail.webp",
+    "width": 1800,
+    "height": 1200,
+    "source": "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/1283219/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "food",
+    "file": "/media/templates/editorial/food.webp",
+    "width": 1800,
+    "height": 1013,
+    "source": "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/958545/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "flowers",
+    "file": "/media/templates/editorial/flowers.webp",
+    "width": 1800,
+    "height": 2400,
+    "source": "https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/931177/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "fire",
+    "file": "/media/templates/editorial/fire.webp",
+    "width": 1800,
+    "height": 1338,
+    "source": "https://images.pexels.com/photos/266487/pexels-photo-266487.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/266487/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "city",
+    "file": "/media/templates/editorial/city.webp",
+    "width": 1800,
+    "height": 1117,
+    "source": "https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/466685/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "coffee",
+    "file": "/media/templates/editorial/coffee.webp",
+    "width": 1800,
+    "height": 1202,
+    "source": "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/302899/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "camera",
+    "file": "/media/templates/editorial/camera.webp",
+    "width": 1800,
+    "height": 1192,
+    "source": "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/90946/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  },
+  {
+    "id": "elephant",
+    "file": "/media/templates/editorial/elephant.webp",
+    "width": 1800,
+    "height": 1228,
+    "source": "https://images.pexels.com/photos/247431/pexels-photo-247431.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "page": "https://www.pexels.com/photo/247431/",
+    "license": "https://www.pexels.com/license/",
+    "match": "Selected free alternative; not asserted to be the original screenshot photograph."
+  }
+]

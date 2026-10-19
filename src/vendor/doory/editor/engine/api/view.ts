@@ -82,7 +82,10 @@ export class ViewApi {
     }
     const doc = this.engine.state.doc
     const page = this.engine.pageSizeOf(this.engine.state.activePageId)
-    this.engine.store.setState({ zoom: fitZoomForPages(size, page, widestPage(doc), mode, canvasPadding(size.width)), zoomMode: mode })
+    // Default to at most 77% on the canvas, while still fitting large pages and smaller screens.
+    const fitted = fitZoomForPages(size, page, widestPage(doc), mode, canvasPadding(size.width))
+    const zoom = mode === 'fit-page' ? Math.min(fitted, 0.77) : fitted
+    this.engine.store.setState({ zoom, zoomMode: mode })
   }
 
   /** Recomputes the zoom while a fit mode is active (viewport or page size changed). */
