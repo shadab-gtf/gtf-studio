@@ -1,6 +1,8 @@
 import { deflateSync, inflateSync, strToU8, strFromU8 } from "fflate";
 import { parseDocument, type CreativeDocument } from "@/core/document/schema";
 
+export const MAX_SERVER_SHARE_BYTES = 4 * 1024 * 1024;
+
 /**
  * Local-first share transport. A design is shared by compressing its document into a URL-safe string that
  * travels in the link itself (`/view#d=...`), so a recipient on any device can open it with no account and
@@ -10,7 +12,10 @@ import { parseDocument, type CreativeDocument } from "@/core/document/schema";
 function toBase64Url(bytes: Uint8Array): string {
   let binary = "";
   for (const byte of bytes) binary += String.fromCharCode(byte);
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return btoa(binary)
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
 }
 
 function fromBase64Url(value: string): Uint8Array {
@@ -40,31 +45,58 @@ export function templateShareUrl(id: string, origin = ""): string {
 }
 
 /** View-only link that carries a full design in the URL fragment. */
-export function designShareUrl(document: CreativeDocument, origin = ""): string {
+export function designShareUrl(
+  document: CreativeDocument,
+  origin = "",
+): string {
   return `${origin}/view#d=${encodeDocument(document)}`;
 }
 
 /**
- * Uploads an encoded design to the share store and returns its short id, or `null` when the store is not
- * configured or the design is too large for it. A `null` tells the caller to fall back to the in-URL link.
+ * Uploads an encoded design and returns its short id. Returns `null` only when the server has no share store;
+ * upload failures throw so callers do not silently copy a very long in-URL link instead.
  */
 export async function uploadSharedDocument(
   encoded: string,
   signal?: AbortSignal,
 ): Promise<string | null> {
-  try {
-    const response = await fetch("/api/share", {
-      method: "POST",
-      headers: { "content-type": "text/plain" },
-      body: encoded,
-      signal,
+  if (encoded.length > MAX_SERVER_SHARE_BYTES) {
+    const configResponse = await fetch("/api/share");
+    if (!configResponse.ok)
+      throw new Error("The share service could not be reached.");
+    const config = (await configResponse.json()) as { configured?: unknown };
+    if (config.configured !== true) return null;
+
+    const id = crypto.randomUUID().replace(/-/g, "");
+    const { upload } = await import("@vercel/blob/client");
+    await upload(`shares/${id}.txt`, encoded, {
+      access: "private",
+      contentType: "text/plain",
+      handleUploadUrl: "/api/share/upload",
+      multipart: true,
+      abortSignal: signal,
     });
-    if (!response.ok) return null;
-    const data = (await response.json()) as { id?: string };
-    return typeof data.id === "string" && data.id.length > 0 ? data.id : null;
-  } catch {
-    return null;
+    return id;
   }
+
+  const response = await fetch("/api/share", {
+    method: "POST",
+    headers: { "content-type": "text/plain" },
+    body: encoded,
+    signal,
+  });
+  if (response.status === 501) return null;
+  const data = (await response.json()) as { id?: unknown; error?: unknown };
+  if (!response.ok) {
+    throw new Error(
+      typeof data.error === "string"
+        ? data.error
+        : "The share link could not be created.",
+    );
+  }
+  if (typeof data.id !== "string" || !/^[a-f0-9]{32}$/.test(data.id))
+    throw new Error("The share service returned an invalid link.");
+  return data.id;
 }
 
 /** View-only link that points at a short, stored design id (`/view/s/<id>`). */
