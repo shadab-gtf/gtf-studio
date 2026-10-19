@@ -43,3 +43,31 @@ export function templateShareUrl(id: string, origin = ""): string {
 export function designShareUrl(document: CreativeDocument, origin = ""): string {
   return `${origin}/view#d=${encodeDocument(document)}`;
 }
+
+/**
+ * Uploads an encoded design to the share store and returns its short id, or `null` when the store is not
+ * configured or the design is too large for it. A `null` tells the caller to fall back to the in-URL link.
+ */
+export async function uploadSharedDocument(
+  encoded: string,
+  signal?: AbortSignal,
+): Promise<string | null> {
+  try {
+    const response = await fetch("/api/share", {
+      method: "POST",
+      headers: { "content-type": "text/plain" },
+      body: encoded,
+      signal,
+    });
+    if (!response.ok) return null;
+    const data = (await response.json()) as { id?: string };
+    return typeof data.id === "string" && data.id.length > 0 ? data.id : null;
+  } catch {
+    return null;
+  }
+}
+
+/** View-only link that points at a short, stored design id (`/view/s/<id>`). */
+export function storedShareUrl(id: string, origin = ""): string {
+  return `${origin}/view/s/${encodeURIComponent(id)}`;
+}

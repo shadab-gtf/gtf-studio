@@ -11,7 +11,7 @@ import { ServiceError } from "@/services/errors/service-error";
 import { studioDocumentSchema } from "@/core/document/studio-schema";
 import { blobDataUrl, toStudioDocument, withStudioDocument } from "@/features/studio/document-bridge";
 import { rasterizeShareDocument } from "@/features/studio/share-render";
-import { designShareUrl } from "@/lib/share/share-document";
+import { encodeDocument, storedShareUrl, uploadSharedDocument } from "@/lib/share/share-document";
 import type { LoadContext } from "@/vendor/doory/editor/engine/serialization";
 import type { FontUse } from "@/vendor/doory/editor/engine/docOps";
 import { assertImageDimensions } from "@/features/assets/image-limits";
@@ -96,9 +96,14 @@ export function createStudioEditorAdapter(project: Project, catalog: StudioCatal
     }));
   };
   const shareLoadContext: LoadContext = { resolveSrc, ensureFonts: ensureShareFonts };
-  // A "view" link carries a rasterised snapshot of the live design, so the recipient sees only the artwork — no editor, no device lookup.
-  const buildShareUrl = async (role: ShareRole, token: string): Promise<string> =>
-    role === "view" ? designShareUrl(await rasterizeShareDocument(readDocument(), shareLoadContext)) : shareUrl(role, token);
+  // A "view" link is a rasterised snapshot of the live design, so the recipient sees only the artwork — no editor, no
+  // device lookup. The snapshot is stored for a short `/view/s/<id>` link; if no store is configured it travels in the URL.
+  const buildShareUrl = async (role: ShareRole, token: string): Promise<string> => {
+    if (role !== "view") return shareUrl(role, token);
+    const encoded = encodeDocument(await rasterizeShareDocument(readDocument(), shareLoadContext));
+    const id = await uploadSharedDocument(encoded);
+    return id ? storedShareUrl(id) : `/view#d=${encoded}`;
+  };
   const adapter: EditorAdapter = {
     async save(input) {
       const document = studioDocumentSchema.parse(input.document);
